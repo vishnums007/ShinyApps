@@ -1,0 +1,8 @@
+Update wish list
+
+1) Color code fish with age : Adult room:  Good surgery period: Green, >1 year old: Yellow , >18 month > red
+Nursery: 06-08 week,violet,: ready to transfer
+2) Room statistics bar: Total number of fish, occupied tanks, empty tanks, average age
+3) Group editing tab. 
+4) Johnson nursery --> to any adult room
+5) Transfer fish from nursery to multiple tanks in the adult room.
