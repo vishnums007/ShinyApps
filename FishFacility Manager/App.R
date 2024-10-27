@@ -217,8 +217,8 @@ empty_selection_check<-function(selected_rows,file){
 cookie_expiry <- 7
 
 user_base <- tibble(
-  user = c("Mokalledlab", "vishnu"),
-  password = c("zebrafish", "vms"),
+  user = c("xxx", "yyy"),
+  password = c("xyz", "ywx"),
   permissions = c("standard", "admin"),
   password_hash = sapply(c("zebrafish", "vms"), sodium::password_store),
   name = c("Mokalled lab", "Vishnu")
