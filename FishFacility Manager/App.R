@@ -987,6 +987,7 @@ server <- function(input, output, session) {
       title = p(style= "color:green",strong("SUCCESS !! ")),
       footer = tagList(actionButton("adult_add_modal_success","Close"))
     ))
+    updateSelectizeInput(session, inputId = "Tank_name_adult" ,choices = NULL,server= T)
   })
   
   observeEvent(input$adult_add_modal_success,{
@@ -1407,8 +1408,9 @@ server <- function(input, output, session) {
 
 
       }
+      if(zebra_n[from_stock_loc,7]<0){
       zebra_n<-zebra_n[-from_stock_loc,]
-      
+      }
       
     }else{
       
@@ -1452,6 +1454,7 @@ server <- function(input, output, session) {
       title = p(style= "color:green",strong("SUCCESS !! ")),
       footer = tagList(actionButton("nursery_transfer_modal_success","Close"))
     ))
+    updateSelectizeInput(session, inputId = "Select_destination_tank_nursery_transfer" ,choices = NULL,server= T)
   })
   
   observeEvent(input$nursery_transfer_modal_success,{
@@ -1677,6 +1680,7 @@ server <- function(input, output, session) {
       title = p(style= "color:green",strong("SUCCESS !! ")),
       footer = tagList(actionButton("adult_transfer_modal_success","Close"))
     ))
+    updateSelectizeInput(session, inputId = "adult_stock_transfer_destination_name" ,choices = NULL,server= T)
     
   })
   
@@ -3619,12 +3623,13 @@ server <- function(input, output, session) {
         ),
         p(strong(tags$u("v2.0.1"))),
         tags$ul(
-          tags$li("102724: Fixed a bug on the bulk transfer from the nursery. Updated the fish facilty map.")
+          tags$li("102724: Fixed a bug on the bulk transfer from the nursery. Updated the fish facilty map."),
+          tags$li("102924: Fixed a bug on the default memory update of empty tank list")
         )
       ),
       br(),
       p(style= "text-align: center",(strong(HTML("&copy; Mokalled Lab. "),"This website is powered using Shiny and R"))),
-      p(style= "text-align:center", em("v2.0.1, last updated: 27-October-2024"))
+      p(style= "text-align:center", em("v2.0.1, last updated: 29-October-2024"))
     )
   })
   
