@@ -12,8 +12,6 @@ library(patchwork)
 library(bslib)
 library(ggplot2)
 library(DT)
-options(java.parameters = "-Xss256m")
-library(xlsx)
 library(RSQLite)
 library(DBI)
 library(lubridate)
@@ -212,6 +210,67 @@ empty_selection_check<-function(selected_rows,file){
   return(empty_check)
 }
 
+#function to create a label
+create_label <- function(label_info) {
+  # Set up a PNG device with specific dimensions
+  png("label.png", width = 900, height = 300, res = 300)
+  par(mar = c(0, 0, 0, 0))
+  # Set up a blank plot
+  plot(1, type = "n", xlab = "", ylab = "", xlim = c(0, 10), ylim = c(0, 10), axes = FALSE)
+  # Draw a border around the plot area
+  rect(0, 0, 10, 10, border = "black", lwd = 1) # Adjust 'lwd' for border width
+  
+  # function to adjust the size dynamically
+  fit_height<-function(name){
+    cex_value <- 0.5
+    text_height <- strheight(name)
+    #print(text_width)
+    maxheight=10
+    if(text_height>maxheight){
+      cex_value<-(maxheight/text_height)*cex_value
+    }
+    return(cex_value)
+  }
+  
+  fit_text<-function(name){
+    cex_value <- 1
+    text_width <- strwidth(name, cex = cex_value)
+    #print(text_width)
+    maxwidth=7.5
+    if(text_width>maxwidth){
+      cex_value<-maxwidth/text_width
+    }
+    return(cex_value)
+  }
+  
+  # Add the stock number to the label
+  text(x = 1, y = 9, labels = label_info[1], cex = 1) # stock
+  text(x = 8.2, y = 9, labels = "No.", cex = 1)
+  text(x = 9.2, y = 9, labels = label_info[6], cex = 1) #number
+  text(x = 3, y = 1, labels = label_info[2], cex = 1) #DOB
+  text(x = 8, y = 1, labels = label_info[5], cex = 1) #Resp
+  text(x = 3.85, y = 6, labels = label_info[3], cex = fit_text(label_info[3])) #Fish
+  text(x = 3.85, y = 4, labels = label_info[4], cex = fit_text(label_info[3])) #Genotype
+  
+  wrapped_text <- strwrap(label_info[7], width = 13)
+  wrapped_text<-paste(wrapped_text, collapse = "\n")
+  height=fit_height(wrapped_text)
+  text(x = 8.85, y = 5, labels = paste(wrapped_text, collapse = "\n"), cex = height) #Notes
+  
+  # Draw a horizontal line below the text
+  lines(x = c(0, 10), y = c(8, 8), lwd = 1) # Adjust line position and width as needed
+  lines(x = c(2, 2), y = c(10, 8), lwd = 1)
+  lines(x = c(8.7,8.7), y = c(10, 8), lwd = 1)
+  lines(x = c(7.7,7.7), y = c(10, 8), lwd = 1)
+  lines(x = c(0, 10), y = c(2, 2), lwd = 1) 
+  #lines(x = c(3, 3), y = c(2, 0), lwd = 1)
+  lines(x = c(6, 6), y = c(2, 0), lwd = 1)
+  lines(x = c(7.7,7.7), y = c(8, 2), lwd = 1)
+  # Close the device to save the file
+  dev.off()
+}
+
+
 
 # How many days should sessions last?
 cookie_expiry <- 7
@@ -244,6 +303,7 @@ ui<- dashboardPage(
       menuItem("Transfer Fish",tabName = "transfer_stocks", icon = icon("exchange-alt")),
       menuItem("Edit Fish Stocks",tabName = "edit_stocks", icon = icon("pencil")),
       menuItem("Genealogy",tabName = "familytree", icon = icon("timeline")),
+      menuItem("Print Label",tabName = "print_label", icon = icon("print")),
       menuItem("Archive",tabName = "archive", icon = icon("box-archive")),
       menuItem("User logs",tabName = "logbook", icon = icon("book")),
       menuItem("About", tabName = "about", icon = icon("info-circle"))
@@ -269,6 +329,7 @@ ui<- dashboardPage(
       tabItem(tabName = "add_stocks", uiOutput("add_stocks_ui")),
       tabItem(tabName = "transfer_stocks",uiOutput("transfer_stocks_ui")),
       tabItem(tabName = "edit_stocks", uiOutput("edit_stock_ui")),
+      tabItem(tabName = "print_label", uiOutput("print_label_ui")),
       tabItem(tabName = "archive", uiOutput("archive_ui")),
       tabItem(tabName = "logbook", uiOutput("logbook_ui")),
       tabItem(tabName = "familytree", uiOutput("familytree_ui")),
@@ -341,7 +402,7 @@ server <- function(input, output, session) {
         
         actionButton(inputId = "fishroom_upload", label="Show Fish Stocks"),
         
-        downloadButton("Download_facility_map","Download Room map (.xlsx)")
+        downloadButton("Download_facility_map","Download Room map (.csv)")
       ),
       div(id="show_stats",
           
@@ -432,7 +493,7 @@ server <- function(input, output, session) {
   
   output$fishroom_map<-DT::renderDataTable(
     datatable(
-      room_map(),option=list(pageLength=80,
+      room_map(),selection = "single",option=list(pageLength=80,
                              rowCallback = JS(
                                "function(row, data, index) {",
                                "  var age = data[data.length - 1];",
@@ -455,10 +516,10 @@ server <- function(input, output, session) {
   
   output$Download_facility_map<-downloadHandler(
     filename=function(){
-      paste("Fish stocks in_", fishroom_choice(), ".xlsx", sep="")
+      paste("Fish stocks in_", fishroom_choice(), ".csv", sep="")
     },
     content=function(file){
-      write.xlsx(room_map(),file, showNA = F,row.names = F)
+      write.csv(room_map(),file,row.names = F)
     }
   )
   ################################################################################################################
@@ -3299,7 +3360,7 @@ server <- function(input, output, session) {
           
           actionButton(inputId = "archive_upload", label="Show Fish Archive"),
           
-          downloadButton("Download_archive","Download Archive (.xlsx)"),
+          downloadButton("Download_archive","Download Archive (.csv)"),
           
           hr(),
           
@@ -3336,10 +3397,10 @@ server <- function(input, output, session) {
   
   output$Download_archive<-downloadHandler(
     filename=function(){
-      "MokalledLab_FishArchive.xlsx"
+      "MokalledLab_FishArchive.csv"
     },
     content=function(file){
-      write.xlsx(fishArchive(),file, showNA = F,row.names = F)
+      write.csv(fishArchive(),file, row.names = F)
     }
   )
   
@@ -3361,7 +3422,7 @@ server <- function(input, output, session) {
           
           actionButton(inputId = "log_upload", label="Upload Log"),
           
-          downloadButton("Download_log","Download Log (.xlsx)"),
+          downloadButton("Download_log","Download Log (.csv)"),
           hr(),
           
           div(DT::dataTableOutput("fish_log")%>% withSpinner(type=5),
@@ -3397,10 +3458,10 @@ server <- function(input, output, session) {
   
   output$Download_log<-downloadHandler(
     filename=function(){
-      "MokalledLab_Fishdatabase_log.xlsx"
+      "MokalledLab_Fishdatabase_log.csv"
     },
     content=function(file){
-      write.xlsx(fishlog(),file, showNA = F,row.names = F)
+      write.csv(fishlog(),file, row.names = F)
     }
   )
   
@@ -3437,7 +3498,7 @@ server <- function(input, output, session) {
               actionButton(inputId = "Genealogy_generate", label="Identify Genealogy"),
               
               downloadButton("Download_genealogy_tree","Download Family Tree (.pdf)"),
-              downloadButton("Download_genealogy_table","Download Family Table (.xlsx)"),
+              downloadButton("Download_genealogy_table","Download Family Table (.csv)"),
               br(),
               br(),
               div(id="genealogy_tree_output",
@@ -3549,10 +3610,10 @@ server <- function(input, output, session) {
     
     output$Download_genealogy_table<-downloadHandler(
       filename=function(){
-        paste("Genealogy table_", input$Select_genealogy_stock, " - ", av[stoc_loc, 4],".xlsx")
+        paste("Genealogy table_", input$Select_genealogy_stock, " - ", av[stoc_loc, 4],".csv")
       },
       content=function(file){
-        write.xlsx(famtree,file, showNA = F, row.names = F)
+        write.csv(famtree,file, row.names = F)
       }
     )
     
@@ -3562,7 +3623,150 @@ server <- function(input, output, session) {
     
   })
   
-  #######################################################UI section for the about part##################################################################
+  #######################################################UI Section for print label part###################################################################
+  #######################################################################################################################################################
+  output$print_label_ui<-renderUI({
+    req(credentials()$user_auth)
+    fluidPage(
+      useShinyjs(),
+      fluidRow(
+        box(width = 12, collapsible = TRUE, title = strong("Instructions:"), "
+            Here, you will be able to print label for your fish stock. First, please the select the required fish room
+            from the dropdown box and click View FishFacility Map. Then, you can click on the required fish stock row in the fish facility map, which you would like to print the label.
+            This should autopopulate details in white boxes that takes info for the label. You can edit these details if you wish, except for stock number and date of birth. 
+            Once you finalize the details for the label, click Preview Label. Finally, click the Download Label button to save
+            the label in your computer. Then, you can print these with your own printer.")),
+      wellPanel(
+        
+        selectInput("print_label_Fishroom_choices", "Select the Fish room: ", choices = list("Johnson Fish Room",
+                                                                                 "Streisinger Fish Room",
+                                                                                 "Walker Nursery",
+                                                                                 "Johnson Nursery"
+        )),
+        
+        actionButton(inputId = "print_label_fishroom_upload", label="View FishFacilty Map"),
+      ),
+      div(id="print_label",
+          
+          wellPanel(
+            
+            strong(h3("PRINT Label")),
+            hr(),
+            fluidRow(column(width = 2, selectizeInput(inputId = "print_label_stockn", label = "Stock number : ", selected=NULL,choices= NULL , options = list(create=F, placeholder = "Stock Number"))),
+                     column(width = 2, offset=1, selectizeInput(inputId = "print_label_Fishn", label = "Fish number : ", selected=NULL,choices= NULL , options = list(create=T, placeholder = "Fish Number"))),
+                     column(width = 2, offset=1, selectizeInput(inputId = "print_label_Fishname", label = "Fish Name : ", selected=NULL,choices= NULL , options = list(create=T, placeholder = "Fish Name"))),
+                     column(width = 2, offset=1, selectizeInput(inputId = "print_label_Fishgenotype", label = "Fish Genotype : ", selected=NULL,choices= NULL , options = list(create=T, placeholder = "Fish Genotype"))),
+            ),
+            fluidRow(column(width = 2, selectizeInput(inputId = "print_label_DOB", label = "DOB : ", selected=NULL,choices= NULL , options = list(create=F, placeholder = "DOB"))),
+                     column(width = 2, offset=1, selectizeInput(inputId = "print_label_Responsible", label = "Responsible : ", selected=NULL,choices= NULL , options = list(create=T, placeholder = "Resposible"))),
+                     column(width = 6, offset=1, selectizeInput(inputId = "print_label_Notes", label = "Notes : ", selected=NULL,choices= NULL , options = list(create=T, placeholder = "Notes")))
+            ),
+            hr(),
+            fluidRow(column(width = 2,actionButton(inputId = "preview_label_button", label="Preview Label")),
+                     column(width = 2,offset=1, downloadButton(outputId = "Download_label_button", label="Download Label"))
+                     ),
+            hr(),
+            div(id="preview_label",
+                
+                
+                  strong(("Preview")),
+                  hr(),
+                  imageOutput("labelImage")
+  
+                )%>% shinyjs::hidden() 
+            
+            
+            
+          ),
+          
+          fluidRow(
+            wellPanel(
+              div(h4(strong(textOutput("print_label_Fishroom_title"))),
+                  dataTableOutput("print_label_fishroom_map"),
+                  style = "width: 100%; overflow-x: auto;")
+            )
+          )
+      )%>% shinyjs::hidden() 
+    )
+  })
+  
+  #####################################################Server Section for  Print labeL####################################################################
+  ########################################################################################################################################################
+  
+  print_label_fishroom_choice<-eventReactive(input$print_label_fishroom_upload,{input$print_label_Fishroom_choices})
+  print_label_room_map<-eventReactive(input$print_label_fishroom_upload,{
+    if (print_label_fishroom_choice()=="Johnson Fish Room"){
+      zebra<- read.csv(file = "Johnson_room.csv", header = T, fill = T,encoding="UTF-8")
+      zebra<-zebra[,-8:-9]
+    }else if(print_label_fishroom_choice()=="Streisinger Fish Room"){
+      zebra<- read.csv(file = "Streisinger_room.csv", header = T, fill = T,encoding="UTF-8")
+      zebra<-zebra[,-8:-9]
+    }else if(print_label_fishroom_choice()=="Walker Nursery"){
+      zebra<- read.csv(file = "Walker nursery.csv", header = T, fill = T,encoding="UTF-8")
+    }else if(print_label_fishroom_choice()=="Johnson Nursery"){
+      zebra<- read.csv(file = "Johnson nursery .csv", header = T, fill = T,encoding="UTF-8")
+    }
+    return(zebra)
+  })
+  
+  observeEvent(input$print_label_fishroom_upload,{
+    
+    output$print_label_Fishroom_title<-renderText({
+      paste(print_label_fishroom_choice())
+    })
+    output$print_label_fishroom_map<-DT::renderDataTable(
+      print_label_room_map(),selection = "single",option=list(pageLength=80,lengthChange = TRUE,lengthMenu = c(5, 10, 20, 40, 80, 100) )
+    )
+    
+    shinyjs::show("print_label")
+  })
+  
+
+  
+  observeEvent(input$print_label_fishroom_map_rows_selected,{
+    selected_rows <- input$print_label_fishroom_map_rows_selected
+    #print(selected_rows)
+    
+    if(length(selected_rows)>0){
+      updateSelectizeInput(session, inputId = "print_label_stockn",choices = list(print_label_room_map()[selected_rows,2]), server=T)
+      updateSelectizeInput(session, inputId = "print_label_DOB",choices = list(print_label_room_map()[selected_rows,3]), server=T)
+      updateSelectizeInput(session, inputId = "print_label_Fishname",choices = list(print_label_room_map()[selected_rows,4]), server=T)
+      updateSelectizeInput(session, inputId = "print_label_Fishgenotype",choices = list(print_label_room_map()[selected_rows,5]), server=T)
+      updateSelectizeInput(session, inputId = "print_label_Responsible",choices = list(print_label_room_map()[selected_rows,6]), server=T)
+      updateSelectizeInput(session, inputId = "print_label_Fishn",choices = list(print_label_room_map()[selected_rows,7]), server=T)
+      updateSelectizeInput(session, inputId = "print_label_Notes",choices = list(print_label_room_map()[selected_rows,8]), server=T)
+    }
+    
+    shinyjs::hide("preview_label")
+  })
+  
+  observeEvent(input$preview_label_button,{
+    label_info <- c(input$print_label_stockn, input$print_label_DOB, input$print_label_Fishname, input$print_label_Fishgenotype,
+                    input$print_label_Responsible, input$print_label_Fishn, input$print_label_Notes)
+    create_label(label_info)
+    output$labelImage <- renderImage({
+      list(src = "label.png", width = "100%", height = "100%", alt = "Generated Label")
+    }, deleteFile = F)
+    
+    #print(label_info)
+    output$Download_label_button<-downloadHandler(
+      filename=function(){
+        paste0("Print_Label_for_Stock_ ",input$print_label_stockn,".png")
+      },
+      content=function(file){
+        file.copy("label.png",file)
+        
+      }
+    )
+    
+    shinyjs::show("preview_label")
+  })
+  
+
+  
+
+  
+  #######################################################UI section for the About part##################################################################
   ######################################################################################################################################################
   output$about_ui<- renderUI({
     req(credentials()$user_auth)
