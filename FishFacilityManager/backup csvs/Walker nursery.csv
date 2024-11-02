@@ -1,0 +1,5 @@
+"No..of.Tanks","Stock.number.","Date.of.Birth","Fish.name","Genotype.","Responsible","Number.of.fish","Notes"
+2,29525,"24-Sep-2024","ccdc170-T2A-NTR_P2A-mcherry L2","PCR/+","MHM/RM",20,"genotype"
+2,29526,"24-Sep-2024","ccdc170-T2A-NTR-P2A-mcherry L3","PCR/+","MHM/RM",40,"genotype"
+1,29580,"03-Oct-2024","Tg(-4.3kb)syt11b:NTR2.0-T2A-mcherry","RFP/+","VMS/MHM",23,"RFP+, genotype for F1 transmitters"
+1,29673,"15-Oct-2024","Tg(-4.3kb)syt11b:lawsonCreERT2 - exorh:eGFP","GFP+","VMS/MHM",20,"GFP+ in the pineal gland. Screen for germline transmitters"

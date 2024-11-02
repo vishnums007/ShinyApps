@@ -806,6 +806,7 @@ server <- function(input, output, session) {
   
   
   observeEvent(input$Add_nursery_confirm, {
+    fishdb<-readRDS("fishdatabase.rds")
     room_loc<-locate_room(fishdb[["nursery_info"]], nursery_add_choice())
     zebra1<-fishdb[[fishdb[["nursery_info"]]$db_list_name[room_loc]]]
 
@@ -877,6 +878,7 @@ server <- function(input, output, session) {
   })
   
   observeEvent(input$Nursery_add_archive_dup,{
+    fishdb<-readRDS("fishdatabase.rds")
     room_loc<-locate_room(fishdb[["nursery_info"]], nursery_add_choice())
     zebra1<-fishdb[[fishdb[["nursery_info"]]$db_list_name[room_loc]]]
     
@@ -951,13 +953,9 @@ server <- function(input, output, session) {
   ##########server part of adding adult fish
   adult_add_choice<-eventReactive(input$upload_adult_room,{input$fishroom_choices_adult_add})
   observeEvent(input$upload_adult_room,{
-    if(adult_add_choice()=="Johnson Fish Room"){
-      adult_file <- read.csv(file = "Johnson_room.csv", header = T, fill = T,encoding="UTF-8")
-    }else if (adult_add_choice()=="Streisinger Fish Room") {
-      adult_file <- read.csv(file = "Streisinger_room.csv", header = T, fill = T,encoding="UTF-8")
-    }else if (adult_add_choice()=="Chien Fish Room") {
-      adult_file <- read.csv(file = "Chien_room.csv", header = T, fill = T,encoding="UTF-8")
-    }
+    fishdb<-readRDS("fishdatabase.rds")
+    room_loc<-locate_room(fishdb[["adult_info"]], adult_add_choice())
+    adult_file<-fishdb[[fishdb[["adult_info"]]$db_list_name[room_loc]]]
     
     empty<- find_empty_tanks(adult_file)
     updateSelectizeInput(session, inputId = "Tank_name_adult", selected = empty[[1]][1] ,choices = empty,server= T) 
@@ -971,9 +969,9 @@ server <- function(input, output, session) {
                      "AA","AB","AC","AD","AE","AF","AG","AH","AI","AJ")
     updateSelectizeInput(session, inputId = "Food_label_adult", selected = food_label[14] ,choices = food_label,server= T)
     
-    archive<-read.csv(file = "Archive.csv", header = T, fill = T,encoding="UTF-8")
+    archive<-fishdb[["Archive"]]
     
-    stockn_list<-unique(archive[,2])
+    stockn_list<-as.numeric(unique(archive[,2]))
     max_stockn<-max(stockn_list)
     new_stockn_list<- (max_stockn+1:(max_stockn+100))
     updateSelectizeInput(session, inputId = "Stock_no_add_adult",choices = new_stockn_list,selected = new_stockn_list[1], server=T)
@@ -1051,29 +1049,23 @@ server <- function(input, output, session) {
   
   
   observeEvent(input$Add_adult_confirm,{
-    if(adult_add_choice()=="Johnson Fish Room"){
-      adult_file <- read.csv(file = "Johnson_room.csv", header = T, fill = T,encoding="UTF-8")
-      filename_Ad<-"Johnson_room.csv"
-    }else if (adult_add_choice()=="Streisinger Fish Room") {
-      adult_file <- read.csv(file = "Streisinger_room.csv", header = T, fill = T,encoding="UTF-8")
-      filename_Ad<-"Streisinger_room.csv"
-    }else if (adult_add_choice()=="Chien Fish Room") {
-      adult_file <- read.csv(file = "Chien_room.csv", header = T, fill = T,encoding="UTF-8")
-      filename_Ad<-"Chien_room.csv"
-    }
+    fishdb<-readRDS("fishdatabase.rds")
+    room_loc<-locate_room(fishdb[["adult_info"]], adult_add_choice())
+    adult_file<-fishdb[[fishdb[["adult_info"]]$db_list_name[room_loc]]]
     
     adult_file[locate_tank(adult_file,input$Tank_name_adult),]<-list(input$Tank_name_adult, input$Stock_no_add_adult, format(input$DOB_add_adult,"%d-%b-%Y"),
                                                                      input$Fish_name_add_adult, input$Fish_Genotype_add_adult, input$Fish_Responsible_add_adult,
                                                                      input$nFish_add_adult,paste(input$Experiment_label_adult,collapse = " , "),input$Food_label_adult,
                                                                      input$Notes_add_adult)
-    log_data<-read.csv(file = "log.csv",header = T, fill = T,encoding="UTF-8")
-    
+    log_data<-fishdb[["Database_logs"]]
     log_data[nrow(log_data)+1,]<-list(format(Sys.time(), "%d-%b-%Y %H.%M"),input$Stock_no_add_adult,format(input$DOB_add_adult,"%d-%b-%Y"),
                                       input$Fish_name_add_adult,input$Fish_Genotype_add_adult,input$Fish_Responsible_add_adult,
                                       input$nFish_add_adult,
                                       paste0(" ADDED STOCK IN THE ", adult_add_choice()))
-    write.csv(log_data, file = "log.csv",row.names = F)
-    write.csv(adult_file,file = filename_Ad, row.names = F)
+    fishdb$Database_logs<-log_data
+    adult_selected<-fishdb[["adult_info"]]$db_list_name[room_loc]
+    fishdb[[adult_selected]]<-adult_file
+    saveRDS(fishdb, "fishdatabase.rds")
     
     showModal(modalDialog(
       tagList(

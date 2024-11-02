@@ -58,6 +58,13 @@ locate_tank<-function(file, tankname){
   return(tank_loc)
 }
 
+locate_room<-function(df, roomname){
+  rooms<-df[,1]
+  rooms<-rooms[!is.na(rooms)]
+  room_loc<-which(roomname==rooms)
+  return(room_loc)
+}
+
 
 locate_stockn<-function(file, stocknumber){
   tanks<- file$Stock.number.
@@ -247,12 +254,12 @@ create_label <- function(label_info) {
   text(x = 1, y = 9, labels = label_info[1], cex = 1) # stock
   text(x = 8.2, y = 9, labels = "No.", cex = 1)
   text(x = 9.2, y = 9, labels = label_info[6], cex = 1) #number
-  text(x = 1.5, y = 1, labels = label_info[2], cex = 1) #DOB
+  text(x = 3, y = 1, labels = label_info[2], cex = 1) #DOB
   text(x = 8, y = 1, labels = label_info[5], cex = 1) #Resp
   text(x = 3.85, y = 6, labels = label_info[3], cex = fit_text(label_info[3])) #Fish
-  text(x = 3.85, y = 4, labels = label_info[4], cex = fit_text(label_info[4])) #Genotype
+  text(x = 3.85, y = 4, labels = label_info[4], cex = fit_text(label_info[3])) #Genotype
   
-  wrapped_text <- strwrap(label_info[7], width = 15)
+  wrapped_text <- strwrap(label_info[7], width = 13)
   wrapped_text<-paste(wrapped_text, collapse = "\n")
   height=fit_height(wrapped_text)
   text(x = 8.85, y = 5, labels = paste(wrapped_text, collapse = "\n"), cex = height) #Notes
@@ -263,12 +270,13 @@ create_label <- function(label_info) {
   lines(x = c(8.7,8.7), y = c(10, 8), lwd = 1)
   lines(x = c(7.7,7.7), y = c(10, 8), lwd = 1)
   lines(x = c(0, 10), y = c(2, 2), lwd = 1) 
-  lines(x = c(3, 3), y = c(2, 0), lwd = 1)
+  #lines(x = c(3, 3), y = c(2, 0), lwd = 1)
   lines(x = c(6, 6), y = c(2, 0), lwd = 1)
   lines(x = c(7.7,7.7), y = c(8, 2), lwd = 1)
   # Close the device to save the file
   dev.off()
 }
+
 
 
 
@@ -297,7 +305,7 @@ ui<- dashboardPage(
   dashboardSidebar(width = 150,
                    collapsed = T,
                    div(htmlOutput("welcome"), style = "padding: 20px"),
-                   sidebarMenu(style = "position: fixed; overflow: visible;",
+                   sidebarMenu(id="tabs",style = "position: fixed; overflow: visible;",
                                menuItem("View Fish stocks",tabName = "view_stocks",icon = icon("search")),
                                menuItem("Add Fish Stocks",tabName = "add_stocks",icon = icon("plus-square")),
                                menuItem("Transfer Fish",tabName = "transfer_stocks", icon = icon("exchange-alt")),
@@ -389,20 +397,19 @@ server <- function(input, output, session) {
       fluidRow(
         box(width = 12, collapsible = TRUE, title = strong("Instructions:"), "
             Here, you will be able to visualize all the fish stocks currently present in the
-            Johnson, Streisinger and Nursery rooms. Please the select the required fish room
+            Johnson, Streisinger and Nursery rooms. First click the Update Fish Rooms button.Then, select the required fish room
             from the dropdown box and click view. You can also download the current sheet using 
               the download button.")),
       wellPanel(
+        actionButton(inputId = "update_room_button", label="Update Fish Rooms"),
         
-        selectInput("Fishroom_choices", "Select the Fish room: ", choices = list("Johnson Fish Room",
-                                                                                 "Streisinger Fish Room",
-                                                                                 "Walker Nursery",
-                                                                                 "Johnson Nursery"
-        )),
+        selectizeInput(inputId = "Fishroom_map_choices", label = "Select the Fish Room: ", choices= NULL ,selected=NULL, multiple = F,options = list(create=F, placeholder = "Select Fish Room")),
         
         actionButton(inputId = "fishroom_upload", label="Show Fish Stocks"),
         
-        downloadButton("Download_facility_map","Download Room map (.csv)")
+        
+        downloadButton("Download_facility_map","Download Room map (.csv)"),
+        h4(style=  "color:red",textOutput("error_upload_fishmap"))
       ),
       div(id="show_stats",
           
@@ -432,18 +439,30 @@ server <- function(input, output, session) {
   })
   ###################################################################################  
   ##server side code for show fish stocks
-  fishroom_choice<-eventReactive(input$fishroom_upload,{input$Fishroom_choices})
-  room_map<-eventReactive(input$fishroom_upload,{
-    if (fishroom_choice()=="Johnson Fish Room"){
-      zebra<- read.csv(file = "Johnson_room.csv", header = T, fill = T,encoding="UTF-8")
-    }else if(fishroom_choice()=="Streisinger Fish Room"){
-      zebra<- read.csv(file = "Streisinger_room.csv", header = T, fill = T,encoding="UTF-8")
-    }else if(fishroom_choice()=="Walker Nursery"){
-      zebra<- read.csv(file = "Walker nursery.csv", header = T, fill = T,encoding="UTF-8")
-    }else if(fishroom_choice()=="Johnson Nursery"){
-      zebra<- read.csv(file = "Johnson nursery .csv", header = T, fill = T,encoding="UTF-8")
+  
+  fishdb<-readRDS("fishdatabase.rds")
+  rooms<-c(fishdb[["nursery_info"]][,1],fishdb[["adult_info"]][,1])
+  
+  observeEvent(input$tabs,{
+    if(input$tabs=="view_stocks"){
+      fishdb<-readRDS("fishdatabase.rds")
+      rooms<-c(fishdb[["nursery_info"]][,1],fishdb[["adult_info"]][,1])
+      updateSelectizeInput(session, inputId = "Fishroom_map_choices", choices = rooms, server = TRUE)
+      shinyjs::hide("show_stats")
     }
+  })
+  
+  observeEvent(input$update_room_button,{
+    updateSelectizeInput(session, inputId = "Fishroom_map_choices", choices = rooms, server = TRUE)
     
+  })
+  
+  fishroom_choice<-eventReactive(input$fishroom_upload,{input$Fishroom_map_choices})
+  room_map<-eventReactive(input$fishroom_upload,{
+    fishdb<-readRDS("fishdatabase.rds")
+    combined_info<-rbind(fishdb[["nursery_info"]],fishdb[["adult_info"]])
+    room_loc<-locate_room(combined_info, fishroom_choice())
+    zebra<-fishdb[[combined_info$db_list_name[room_loc]]]
     age<- days_to_ymd(zebra$Date.of.Birth)
     week<- cal_weeks(zebra$Date.of.Birth)
     position <- which(names(zebra) == "Date.of.Birth") + 1
@@ -453,75 +472,96 @@ server <- function(input, output, session) {
   })
   
   observeEvent(input$fishroom_upload,{
-    n_occu<- length(unlist(find_occupied_tanks(room_map())))
-    output$room_stats_occupied_n<-renderText({
-      paste0(n_occu,", ",round((n_occu/320)*100), "%")
-    })
-    
-    n_free<-length(unlist(find_empty_tanks(room_map())))
-    output$room_stats_unoccupied_n<-renderText({
-      paste0(n_free,", ",round((n_free/320)*100),"%")
-    })
-    
-    room<-room_map()
-    total_fish<- room$Number.of.fish
-    total_fish<-sum(total_fish[!is.na(total_fish)])
-    output$room_stats_totalfish_n<-renderText({
-      paste(total_fish)
-    })
-    
-    mean_weeks<- room$Weeks
-    mean_weeks<-mean(mean_weeks[!is.na(mean_weeks)])
-    avg_days<- mean_weeks*7
-    years <- floor(avg_days / 365.25)
-    remaining_days <- avg_days %% 365.25
-    months <- floor(remaining_days / 30.4375)
-    days <- floor(remaining_days %% 30.4375)
-    #print(mean_weeks)
-    
-    output$room_stats_avg_fish_age<-renderText({
-      paste(years, "years", months, "months", days, "days")
-    })
-    
-    shinyjs::show("show_stats")
-  })
-  
-  output$Fishroom_title<-renderText({
-    paste(fishroom_choice())
-  })
-  
-  
-  output$fishroom_map<-DT::renderDataTable(
-    datatable(
-      room_map(),selection = "single",option=list(pageLength=80,
-                                                  rowCallback = JS(
-                                                    "function(row, data, index) {",
-                                                    "  var age = data[data.length - 1];",
-                                                    "  var bgColor;",
-                                                    "  if (age >= 6 && age <= 12.99) {",
-                                                    "    bgColor = 'rgba(173, 216, 230, 0.50)';",  # Violet color with 45% opacity
-                                                    "  } else if (age >= 13 && age <= 26) {",
-                                                    "    bgColor = 'rgba(0,128,0,0.15)';",      # Green color with 45% opacity
-                                                    "  } else if (age >= 52 && age <= 78) {",
-                                                    "    bgColor = 'rgba(255,165,0,0.15)';",   # Orange color with 45% opacity
-                                                    "  } else if (age > 78) {",
-                                                    "    bgColor = 'rgba(255,0,0,0.15)';",     # Red color with 45% opacity
-                                                    "  }",
-                                                    "  $(row).css('background-color', bgColor);",
-                                                    "}"
-                                                  ),
-                                                  columnDefs = list(list(targets = c(length(colnames(room_map()))), visible = FALSE))),escape=F
-    )
-  )
-  
-  output$Download_facility_map<-downloadHandler(
-    filename=function(){
-      paste("Fish stocks in_", fishroom_choice(), ".csv", sep="")
-    },
-    content=function(file){
-      write.csv(room_map(),file,row.names = F)
+    user_input<- input$Fishroom_map_choices
+    qc<-check_errors(user_input)
+    if(qc==T){
+      output$error_upload_fishmap<- renderText(
+        "ERROR !!! First, you must click Update Fish Rooms and Then, select one fish room from the list!!! "
+      )
+    }else{
+      n_occu<- length(unlist(find_occupied_tanks(room_map())))
+      output$room_stats_occupied_n<-renderText({
+        paste0(n_occu,", ",round((n_occu/320)*100), "%")
+      })
+      
+      n_free<-length(unlist(find_empty_tanks(room_map())))
+      output$room_stats_unoccupied_n<-renderText({
+        paste0(n_free,", ",round((n_free/320)*100),"%")
+      })
+      
+      room<-room_map()
+      total_fish<- room$Number.of.fish
+      total_fish<-sum(total_fish[!is.na(total_fish)])
+      output$room_stats_totalfish_n<-renderText({
+        paste(total_fish)
+      })
+      
+      mean_weeks<- room$Weeks
+      mean_weeks<-mean(mean_weeks[!is.na(mean_weeks)])
+      avg_days<- mean_weeks*7
+      years <- floor(avg_days / 365.25)
+      remaining_days <- avg_days %% 365.25
+      months <- floor(remaining_days / 30.4375)
+      days <- floor(remaining_days %% 30.4375)
+      #print(mean_weeks)
+      
+      output$room_stats_avg_fish_age<-renderText({
+        paste(years, "years", months, "months", days, "days")
+      })
+      
+      shinyjs::show("show_stats")
+      
+      output$Fishroom_title<-renderText({
+        paste(fishroom_choice())
+      })
+      
+      output$fishroom_map<-DT::renderDataTable(
+        datatable(
+          room_map(),selection = "single",option=list(pageLength=80,
+                                                      rowCallback = JS(
+                                                        "function(row, data, index) {",
+                                                        "  var age = data[data.length - 1];",
+                                                        "  var bgColor;",
+                                                        "  if (age >= 6 && age <= 12.99) {",
+                                                        "    bgColor = 'rgba(173, 216, 230, 0.50)';",  # Violet color with 45% opacity
+                                                        "  } else if (age >= 13 && age <= 26) {",
+                                                        "    bgColor = 'rgba(0,128,0,0.15)';",      # Green color with 45% opacity
+                                                        "  } else if (age >= 52 && age <= 78) {",
+                                                        "    bgColor = 'rgba(255,165,0,0.15)';",   # Orange color with 45% opacity
+                                                        "  } else if (age > 78) {",
+                                                        "    bgColor = 'rgba(255,0,0,0.15)';",     # Red color with 45% opacity
+                                                        "  }",
+                                                        "  $(row).css('background-color', bgColor);",
+                                                        "}"
+                                                      ),
+                                                      columnDefs = list(list(targets = c(length(colnames(room_map()))), visible = FALSE))),escape=F
+        )
+      )
+      
+      output$Download_facility_map<-downloadHandler(
+        filename=function(){
+          paste("Fish stocks in_", fishroom_choice(), ".csv", sep="")
+        },
+        content=function(file){
+          write.csv(room_map(),file,row.names = F)
+        }
+      )
+      
+      output$error_upload_fishmap<- renderText(
+        ""
+      )
+      
     }
-  )
+    
+  })
+  
+  
+  
+  
+  observeEvent(input$fishroom_upload,{
+    
+  })
+  
   ################################################################################################################
   #####UI part for adding stocks#######################################################################
   
@@ -545,10 +585,7 @@ server <- function(input, output, session) {
                        p(style=  "color:blue",strong("Please select the required nursery first from the drop down list below and then click load to update the 
                                                          current status of the respective fish room."
                        )),
-                       selectInput("Nursery_choices_add", "Select the Nursery room: ", choices = list(
-                         "Walker Nursery",
-                         "Johnson Nursery"
-                       )),
+                       selectizeInput(inputId = "Nursery_choices_add", label = "Select the Nursery Room: ", choices= NULL ,selected=NULL, multiple = F,options = list(create=F, placeholder = "Select Nursery Room")),
                        fluidRow(column(width = 3,
                                        actionButton(inputId = "nursery_add_select", label="Load"),
                        )),
@@ -601,11 +638,7 @@ server <- function(input, output, session) {
                        p(style=  "color:blue",strong("Please select the required fish room first from the drop down list below and then click load to update the 
                                                          current status of the respective fish room."
                        )),
-                       
-                       selectInput("fishroom_choices_adult_add", "Select the Fish room: ", choices = list(
-                         "Johnson Fish Room",
-                         "Streisinger Fish Room"
-                       )),
+                       selectizeInput(inputId = "fishroom_choices_adult_add", label = "Select the Fish Room: ", choices= NULL ,selected=NULL, multiple = F,options = list(create=F, placeholder = "Select Fish Room")),
                        actionButton(inputId = "upload_adult_room", label="Load"),
                        br(),
                        div(id="add_adult_upload_hide",
@@ -659,6 +692,16 @@ server <- function(input, output, session) {
   })
   ####################################################################################################################
   #########################Server part for adding larval stocks#############################################################
+  nursery_rooms<-fishdb[["nursery_info"]][,1]
+  adult_rooms<-fishdb[["adult_info"]][,1]
+  
+  observeEvent(input$tabs,{
+    if(input$tabs=="add_stocks"){
+      updateSelectizeInput(session, inputId = "Nursery_choices_add", choices = nursery_rooms, server = TRUE)
+      updateSelectizeInput(session, inputId = "fishroom_choices_adult_add", choices = adult_rooms, server = TRUE)
+    }
+    
+  })
   
   nursery_add_choice<-eventReactive(input$nursery_add_select,{input$Nursery_choices_add})
   
@@ -667,9 +710,10 @@ server <- function(input, output, session) {
   })
   
   observeEvent(input$nursery_add_select,{
-    archive<-read.csv(file = "Archive.csv", header = T, fill = T,encoding="UTF-8")
+    #archive<-read.csv(file = "Archive.csv", header = T, fill = T,encoding="UTF-8")
+    archive<-fishdb[["Archive"]]
     
-    stockn_list<-unique(archive[,2])
+    stockn_list<-as.numeric(unique(archive[,2]))
     max_stockn<-max(stockn_list)
     new_stockn_list<- (max_stockn+1:(max_stockn+100))
     updateSelectizeInput(session,inputId = "Stock_no_add_n",choices = new_stockn_list,selected = new_stockn_list[1], server=T)
@@ -703,14 +747,8 @@ server <- function(input, output, session) {
   })
   
   observeEvent(input$Add_nursery,{
-    
-    if (nursery_add_choice()=="Walker Nursery"){
-      zebra1<- read.csv(file = "Walker nursery.csv",header = T, fill = T,encoding="UTF-8")
-      
-    }else if(nursery_add_choice()=="Johnson Nursery"){
-      zebra1<- read.csv(file = "Johnson nursery .csv",header = T, fill = T,encoding="UTF-8")
-      
-    }
+    room_loc<-locate_room(fishdb[["nursery_info"]], nursery_add_choice())
+    zebra1<-fishdb[[fishdb[["nursery_info"]]$db_list_name[room_loc]]]
     
     user_input<-c(input$nTanks_add_n,input$Stock_no_add_n,as.character(input$DOB_add_n),input$Fish_name_add_n,input$Fish_Genotype_add_n,
                   input$nFish_add_n,input$Fish_Responsible_add_n,input$Stock_no_fparent_add_n,input$Fish_fParent_add_n,
@@ -768,20 +806,13 @@ server <- function(input, output, session) {
   
   
   observeEvent(input$Add_nursery_confirm, {
-    
-    if (nursery_add_choice()=="Walker Nursery"){
-      zebra1<- read.csv(file = "Walker nursery.csv",header = T, fill = T,encoding="UTF-8")
-      filename<-"Walker nursery.csv"
-    }else if(nursery_add_choice()=="Johnson Nursery"){
-      zebra1<- read.csv(file = "Johnson nursery .csv",header = T, fill = T,encoding="UTF-8")
-      filename<-"Johnson nursery .csv"
-    }
+    room_loc<-locate_room(fishdb[["nursery_info"]], nursery_add_choice())
+    zebra1<-fishdb[[fishdb[["nursery_info"]]$db_list_name[room_loc]]]
     
     
     #WRITING DATA INTO THE EXCEL
-    archive<-read.csv(file = "Archive.csv", header = T, fill = T,encoding="UTF-8")
-    
-    log_data<-read.csv(file = "log.csv",header = T, fill = T,encoding="UTF-8")
+    log_data<-fishdb[["Database_logs"]]
+    archive<-fishdb[["Archive"]]
     
     archive_stock_list<- archive[,2]
     dup_check_archive<-dup_check(input$Stock_no_add_n,archive_stock_list)
@@ -817,10 +848,12 @@ server <- function(input, output, session) {
                                     input$Experiment_n)
       
       
-      write.csv(archive,file="Archive.csv", row.names = F )
       
-      write.csv(log_data, file = "log.csv",row.names = F)
-      write.csv(zebra1,file = filename, row.names = F)
+      fishdb$Archive<-archive
+      fishdb$Database_logs<-log_data
+      nursery_selected<-fishdb[["nursery_info"]]$db_list_name[room_loc]
+      fishdb[[nursery_selected]]<-zebra1
+      saveRDS(fishdb, "fishdatabase.rds")
       
       showModal(modalDialog(
         tagList(
@@ -844,18 +877,12 @@ server <- function(input, output, session) {
   })
   
   observeEvent(input$Nursery_add_archive_dup,{
-    if (nursery_add_choice()=="Walker Nursery"){
-      zebra1<- read.csv(file = "Walker nursery.csv",header = T, fill = T,encoding="UTF-8")
-      filename<-"Walker nursery.csv"
-    }else if(nursery_add_choice()=="Johnson Nursery"){
-      zebra1<- read.csv(file = "Johnson nursery .csv",header = T, fill = T,encoding="UTF-8")
-      filename<-"Johnson nursery .csv"
-    }
+    room_loc<-locate_room(fishdb[["nursery_info"]], nursery_add_choice())
+    zebra1<-fishdb[[fishdb[["nursery_info"]]$db_list_name[room_loc]]]
     
     #WRITING DATA INTO THE EXCEL after removing old archive entry with the same stock
-    archive<-read.csv(file = "Archive.csv", header = T, fill = T,encoding="UTF-8")
-    
-    log_data<-read.csv(file = "log.csv",header = T, fill = T,encoding="UTF-8")
+    archive<-fishdb[["Archive"]]
+    log_data<-fishdb[["Database_logs"]]
     
     archive_stock_list<- archive[,2]
     
@@ -873,10 +900,13 @@ server <- function(input, output, session) {
                                   input$Experiment_n)
     
     
-    write.csv(archive,file="Archive.csv", row.names = F )
     
-    write.csv(log_data, file = "log.csv",row.names = F)
-    write.csv(zebra1,file = filename, row.names = F)
+    fishdb$Archive<-archive
+    fishdb$Database_logs<-log_data
+    nursery_selected<-fishdb[["nursery_info"]]$db_list_name[room_loc]
+    fishdb[[nursery_selected]]<-zebra1
+    saveRDS(fishdb, "fishdatabase.rds")
+    
     removeModal()
     
     showModal(modalDialog(
@@ -925,6 +955,8 @@ server <- function(input, output, session) {
       adult_file <- read.csv(file = "Johnson_room.csv", header = T, fill = T,encoding="UTF-8")
     }else if (adult_add_choice()=="Streisinger Fish Room") {
       adult_file <- read.csv(file = "Streisinger_room.csv", header = T, fill = T,encoding="UTF-8")
+    }else if (adult_add_choice()=="Chien Fish Room") {
+      adult_file <- read.csv(file = "Chien_room.csv", header = T, fill = T,encoding="UTF-8")
     }
     
     empty<- find_empty_tanks(adult_file)
@@ -1025,6 +1057,9 @@ server <- function(input, output, session) {
     }else if (adult_add_choice()=="Streisinger Fish Room") {
       adult_file <- read.csv(file = "Streisinger_room.csv", header = T, fill = T,encoding="UTF-8")
       filename_Ad<-"Streisinger_room.csv"
+    }else if (adult_add_choice()=="Chien Fish Room") {
+      adult_file <- read.csv(file = "Chien_room.csv", header = T, fill = T,encoding="UTF-8")
+      filename_Ad<-"Chien_room.csv"
     }
     
     adult_file[locate_tank(adult_file,input$Tank_name_adult),]<-list(input$Tank_name_adult, input$Stock_no_add_adult, format(input$DOB_add_adult,"%d-%b-%Y"),
@@ -1132,7 +1167,8 @@ server <- function(input, output, session) {
                                hr(),
                                selectInput("nursery_choices_transfer_dest", "Select the Adult room: ", choices = list(
                                  "Johnson Fish Room",
-                                 "Streisinger Fish Room"
+                                 "Streisinger Fish Room",
+                                 "Chien Fish Room"
                                )),
                                actionButton(inputId = "nursery_transfer_dest_select", label="Select"),
                                hr()
@@ -1171,7 +1207,8 @@ server <- function(input, output, session) {
                        )),
                        selectInput("adult_choices_transfer", "Select the Fish room: ", choices = list(
                          "Johnson Fish Room",
-                         "Streisinger Fish Room"
+                         "Streisinger Fish Room",
+                         "Chien Fish Room"
                        )),
                        
                        actionButton(inputId = "adultroom_transfer_upload", label="Upload"),
@@ -1213,7 +1250,70 @@ server <- function(input, output, session) {
                                strong(textOutput("adult_fish_transfer_success"))
                            )%>% shinyjs::hidden())%>% shinyjs::hidden()
                      )
+                 )),
+        tabPanel("Between Fish Rooms",
+                 div(id="transfer_between_fish_adult",
+                     wellPanel(
+                       useShinyjs(),
+                       p(style=  "color:blue",strong("Please select the required fish room first from the drop down list below and then click upload to update the 
+                                                         current status of the respective fish room."
+                       )),
+                       selectInput("adult_choices_between_transfer", "Select the Fish room: ", choices = list(
+                         "Johnson Fish Room",
+                         "Streisinger Fish Room",
+                         "Chien Fish Room"
+                       )),
+                       
+                       actionButton(inputId = "adultroom_between_transfer_upload", label="Upload"),
+                       hr(),
+                       div(id="adult_transfer_between_upload_hide",
+                           div(fluidRow(column(width=12, dataTableOutput("adult_stock_transfer_between_quickview"),
+                                               style = "width: 100%; overflow-x: auto;"))),
+                           br(),
+                           h3(strong("FROM :-")),
+                           hr(),
+                           br(),
+                           verbatimTextOutput("selected_rows_adult_stock_transfer_between_output"),
+                           br(),
+                           selectizeInput(inputId = "adult_stock_transfer_between_source_name", label = "Select source Tank name*: ", selected=NULL,choices= NULL , options = list(create=F, placeholder = "Type tank name")),
+                           actionButton(inputId = "adultroom_transfer_between_select", label="Select"),
+                           h4(style=  "color:red",textOutput("error_adultroom_transfer_between_select")),
+                           strong(textOutput("adult_transfer_between_room_selection")),
+                           br(),
+                           div(id="adult_transfer_between_dest",
+                               h3(strong("TO :-")),
+                               hr(),
+                               selectInput("adult_choices_transfer_between_dest", "Select the Adult room: ", choices = list(
+                                 "Johnson Fish Room",
+                                 "Streisinger Fish Room",
+                                 "Chien Fish Room"
+                               )),
+                               actionButton(inputId = "adult_transfer_between_dest_select", label="Select"),
+                               hr()
+                           )%>% shinyjs::hidden(),
+                           div(id="adult_transfer_between_tanks",
+                               selectizeInput(inputId = "adult_stock_transfer_between_destination_name", label = "Select destination Tank name* : ", selected=NULL,choices= NULL , options = list(create=F, placeholder = "Type tank name")),
+                               #numericInput(inputId = "adult_transfer_n", label="No of fish to transfer*:", value = 1 , min=1),
+                               selectizeInput(inputId = "adult_transfer_between_n", label = "No of fish to transfer*", choices= NULL ,multiple = F,options = list(create=F, placeholder = "Fish Number to transfer")),
+                               selectizeInput(inputId = "genotype_edit_adult_transfer_between", label = "Genotype*", choices= NULL ,multiple = F,options = list(create=T, placeholder = "Select genotype")),
+                               selectizeInput(inputId = "Experiment_label_adult_transfer_between", label = "Experiment label*", choices= NULL ,multiple = T,options = list(create=T, placeholder = "Select Experiment label")),
+                               selectizeInput(inputId = "Food_label_adult_adult_transfer_between", label = "Food label* ", choices= NULL ,multiple = F,options = list(create=F, placeholder = "Available Food label")),
+                               selectizeInput(inputId = "Notes_adult_transfer_between", label="Notes* : ", choices=NULL, selected = NULL ,options = list(create=T, placeholder = "Enter your notes")),
+                               
+                               p(style=  "color:red",strong("*All fields mandatory."
+                               )),
+                               actionButton(inputId = "adult_stock_transfer_between_source_submit", label="Submit"),
+                               br(),
+                               h4(style=  "color:red",textOutput("error_transfer_between_Adultfish")),
+                               br(),
+                               actionButton(inputId = "reset_adult_transfer_between", label="Reset form"),
+                               br(),
+                               br(),
+                               strong(textOutput("adult_fish_transfer_between_success"))
+                           )%>% shinyjs::hidden())%>% shinyjs::hidden()
+                     )
                  ))
+        
       )
     )
     
@@ -1226,17 +1326,8 @@ server <- function(input, output, session) {
   observeEvent(input$nursery_transfer_upload,{
     if (nursery_transfer_room()=="Walker Nursery"){
       zebra_n<- read.csv(file = "Walker nursery.csv", header = T, fill = T,encoding="UTF-8")
-      zebra_ad<- read.csv(file = "Streisinger_room.csv", header = T, fill = T,encoding="UTF-8")
-      # output$nursery_transfer_room_selection<- renderText({
-      #   "Your Fish will be transferred to the Streisinger room !!"
-      # })
     }else if(nursery_transfer_room()=="Johnson Nursery"){
-      
       zebra_n<- read.csv(file = "Johnson nursery .csv", header = T, fill = T,encoding="UTF-8")
-      zebra_ad<- read.csv(file = "Johnson_room.csv", header = T, fill = T,encoding="UTF-8")
-      # output$nursery_transfer_room_selection<- renderText({
-      #   "Your Fish will be transferred to the Johnson room !!" 
-      # })
     }
     output$nursery_transfer_room_selection<- renderText({
       "" 
@@ -1264,80 +1355,39 @@ server <- function(input, output, session) {
         )
       }
     })
-    
   })
   
   observeEvent(input$nursery_transfer_select,{
-    isolate({
-      if(nursery_transfer_room()=="Walker Nursery"){
-        shinyjs::hide("nursery_transfer_dest")
-        shinyjs::show("nursery_transfer")
-        zebra_n<- read.csv(file = "Walker nursery.csv", header = T, fill = T,encoding="UTF-8")
-        zebra_ad<- read.csv(file = "Streisinger_room.csv", header = T, fill = T,encoding="UTF-8")
-        output$nursery_transfer_room_selection<- renderText({
-          "Your Fish will be transferred to the Streisinger room !!"
-        })
-        from_stock_loc <- locate_stockn(zebra_n, input$Select_nursery_stock_transfer)
-        destination_free_tanks<- list(find_empty_tanks(zebra_ad))
-        updateSelectizeInput(session, inputId = "Select_destination_tank_nursery_transfer" ,choices = destination_free_tanks,server= T,selected = NULL)
-        
-        fishn<- seq(1:(zebra_n[from_stock_loc,7]*2))
-        ov_geno<-orig_val(zebra_n[from_stock_loc,7],fishn)
-        updateSelectizeInput(session, inputId = "nursery_transfer_n",choices = fishn,selected = fishn[ov_geno], server=T)
-        
-        exp_label_std<-list("GENOTYPE","SURGERY","BREEDING STOCK","TRANSPLANT")
-        exp_label<- unique(zebra_ad[,8])
-        exp_label<-append(exp_label,exp_label_std,after = 0)
-        updateSelectizeInput(session, inputId = "Experiment_label_nursery_transfer", selected = exp_label[1] ,choices = exp_label,server= T)
-        
-        food_label<-list("JA","JB","JC","JD","JE","JF","JG","JH","JI","JJ","SA","SB","SC","SD","SE","SF","SG","SH","SI","SJ",
-                         "AA","AB","AC","AD","AE","AF","AG","AH","AI","AJ")
-        updateSelectizeInput(session, inputId = "Food_label_adult_nursery_transfer", selected = food_label[14] ,choices = food_label,server= T)
-        notes_list<-unique(zebra_n[,8])
-        notes_list<- append(notes_list, "Enter notes", after = 0)
-        notes_orig<- orig_val( zebra_n[from_stock_loc,8],notes_list)
-        updateSelectizeInput(session, inputId = "Notes_nursery_trasnfer", selected = notes_list[notes_orig] ,choices = notes_list,server= T)
-        
-        # output$nursery_transfer_room_selection<- renderText({
-        #   "" 
-        # })
-        
-        output$selected_rows_nursery_stock_transfer_output<- renderPrint(
-          print(zebra_n[from_stock_loc,])
-        )
-        
-        
-      }else if(nursery_transfer_room()=="Johnson Nursery"){
-        shinyjs::show("nursery_transfer_dest")
-        shinyjs::hide("nursery_transfer")
-      }
-      
-    })
+    
+    shinyjs::show("nursery_transfer_dest")
+    shinyjs::hide("nursery_transfer")
+    
   })
+  
   nursery_transfer_dest_choice<- eventReactive(input$nursery_transfer_dest_select,{input$nursery_choices_transfer_dest})
   
   observeEvent(input$nursery_transfer_dest_select,{
     if (nursery_transfer_room()=="Walker Nursery"){
       zebra_n<- read.csv(file = "Walker nursery.csv", header = T, fill = T,encoding="UTF-8")
+    }else if(nursery_transfer_room()=="Johnson Nursery"){
+      zebra_n<- read.csv(file = "Johnson nursery .csv", header = T, fill = T,encoding="UTF-8")
+    }
+    
+    if(nursery_transfer_dest_choice()=="Streisinger Fish Room"){
       zebra_ad<- read.csv(file = "Streisinger_room.csv", header = T, fill = T,encoding="UTF-8")
       output$nursery_transfer_room_selection<- renderText({
         "Your Fish will be transferred to the Streisinger room !!"
       })
-    }else if(nursery_transfer_room()=="Johnson Nursery"){
-      
-      zebra_n<- read.csv(file = "Johnson nursery .csv", header = T, fill = T,encoding="UTF-8")
-      if(nursery_transfer_dest_choice()=="Streisinger Fish Room"){
-        zebra_ad<- read.csv(file = "Streisinger_room.csv", header = T, fill = T,encoding="UTF-8")
-        output$nursery_transfer_room_selection<- renderText({
-          "Your Fish will be transferred to the Streisinger room !!" 
-        })
-      }else{
-        zebra_ad<- read.csv(file = "Johnson_room.csv", header = T, fill = T,encoding="UTF-8")
-        output$nursery_transfer_room_selection<- renderText({
-          "Your Fish will be transferred to the Johnson room !!" 
-        })
-      }
-      
+    }else if (nursery_transfer_dest_choice()=="Johnson Fish Room"){
+      zebra_ad<- read.csv(file = "Streisinger_room.csv", header = T, fill = T,encoding="UTF-8")
+      output$nursery_transfer_room_selection<- renderText({
+        "Your Fish will be transferred to the Streisinger room !!"
+      })
+    } else if (nursery_transfer_dest_choice()=="Chien Fish Room"){
+      zebra_ad<- read.csv(file = "Chien_room.csv", header = T, fill = T,encoding="UTF-8")
+      output$nursery_transfer_room_selection<- renderText({
+        "Your Fish will be transferred to the Chien room !!"
+      })
     }
     
     shinyjs::show("nursery_transfer")
@@ -1379,15 +1429,22 @@ server <- function(input, output, session) {
   observeEvent(input$nursery_Fish_transfer_submit,{
     if (nursery_transfer_room()=="Walker Nursery"){
       zebra_n <-read.csv(file = "Walker nursery.csv", header = T, fill = T,encoding="UTF-8")
-      dest_room<- "Streisinger_room"
+      #dest_room<- "Streisinger_room"
     }else if(nursery_transfer_room()=="Johnson Nursery"){
       zebra_n<-read.csv(file = "Johnson nursery .csv", header = T, fill = T,encoding="UTF-8")
-      if(nursery_transfer_dest_choice()=="Streisinger Fish Room"){
-        dest_room<- "Streisinger_room"
-      }else{
-        dest_room<- "Johnson_room"
-      }
-      
+      # if(nursery_transfer_dest_choice()=="Streisinger Fish Room"){
+      #   #dest_room<- "Streisinger_room"
+      # }else{
+      #   dest_room<- "Johnson_room"
+      # }
+    }
+    
+    if(nursery_transfer_dest_choice()=="Streisinger Fish Room"){
+      dest_room<- "Streisinger_room"
+    }else if (nursery_transfer_dest_choice()=="Johnson Fish Room"){
+      dest_room<- "Johnson_room"
+    } else if (nursery_transfer_dest_choice()=="Chien Fish Room"){
+      dest_room<- "Chien_room"
     }
     
     from_stock_loc <- locate_stockn(zebra_n, input$Select_nursery_stock_transfer)
@@ -3634,7 +3691,8 @@ server <- function(input, output, session) {
             Here, you will be able to print label for your fish stock. First, please the select the required fish room
             from the dropdown box and click View FishFacility Map. Then, you can click on the required fish stock row in the fish facility map, which you would like to print the label.
             This should autopopulate details in white boxes that takes info for the label. You can edit these details if you wish, except for stock number and date of birth. 
-            Finally, just click the print button")),
+            Once you finalize the details for the label, click Preview Label. Finally, click the Download Label button to save
+            the label in your computer. Then, you can print these with your own printer.")),
       wellPanel(
         
         selectInput("print_label_Fishroom_choices", "Select the Fish room: ", choices = list("Johnson Fish Room",
@@ -3661,16 +3719,17 @@ server <- function(input, output, session) {
                      column(width = 6, offset=1, selectizeInput(inputId = "print_label_Notes", label = "Notes : ", selected=NULL,choices= NULL , options = list(create=T, placeholder = "Notes")))
             ),
             hr(),
-            actionButton(inputId = "preview_label_button", label="Preview Label"),
+            fluidRow(column(width = 2,actionButton(inputId = "preview_label_button", label="Preview Label")),
+                     column(width = 2,offset=1, downloadButton(outputId = "Download_label_button", label="Download Label"))
+            ),
+            hr(),
             div(id="preview_label",
                 
-                wellPanel(
-                  strong(("Preview")),
-                  hr(),
-                  imageOutput("labelImage"),
-                  hr(),
-                  actionButton(inputId = "Download_label_button", label="Download Label")  
-                )
+                
+                strong(("Preview")),
+                hr(),
+                imageOutput("labelImage")
+                
             )%>% shinyjs::hidden() 
             
             
@@ -3695,8 +3754,10 @@ server <- function(input, output, session) {
   print_label_room_map<-eventReactive(input$print_label_fishroom_upload,{
     if (print_label_fishroom_choice()=="Johnson Fish Room"){
       zebra<- read.csv(file = "Johnson_room.csv", header = T, fill = T,encoding="UTF-8")
+      zebra<-zebra[,-8:-9]
     }else if(print_label_fishroom_choice()=="Streisinger Fish Room"){
       zebra<- read.csv(file = "Streisinger_room.csv", header = T, fill = T,encoding="UTF-8")
+      zebra<-zebra[,-8:-9]
     }else if(print_label_fishroom_choice()=="Walker Nursery"){
       zebra<- read.csv(file = "Walker nursery.csv", header = T, fill = T,encoding="UTF-8")
     }else if(print_label_fishroom_choice()=="Johnson Nursery"){
@@ -3739,9 +3800,28 @@ server <- function(input, output, session) {
   observeEvent(input$preview_label_button,{
     label_info <- c(input$print_label_stockn, input$print_label_DOB, input$print_label_Fishname, input$print_label_Fishgenotype,
                     input$print_label_Responsible, input$print_label_Fishn, input$print_label_Notes)
-    print(label_info)
+    create_label(label_info)
+    output$labelImage <- renderImage({
+      list(src = "label.png", width = "100%", height = "100%", alt = "Generated Label")
+    }, deleteFile = F)
+    
+    #print(label_info)
+    output$Download_label_button<-downloadHandler(
+      filename=function(){
+        paste0("Print_Label_for_Stock_ ",input$print_label_stockn,".png")
+      },
+      content=function(file){
+        file.copy("label.png",file)
+        
+      }
+    )
+    
     shinyjs::show("preview_label")
   })
+  
+  
+  
+  
   
   #######################################################UI section for the About part##################################################################
   ######################################################################################################################################################
@@ -3806,11 +3886,15 @@ server <- function(input, output, session) {
         tags$ul(
           tags$li("102724: Fixed a bug on the bulk transfer from the nursery. Updated the fish facilty map."),
           tags$li("102924: Fixed a bug on the default memory update of empty tank list")
+        ),
+        p(strong(tags$u("v2.0.2"))),
+        tags$ul(
+          tags$li("103124: Added print label function")
         )
       ),
       br(),
       p(style= "text-align: center",(strong(HTML("&copy; Mokalled Lab. "),"This website is powered using Shiny and R"))),
-      p(style= "text-align:center", em("v2.0.1, last updated: 29-October-2024"))
+      p(style= "text-align:center", em("v2.0.2, last updated: 31-October-2024"))
     )
   })
   

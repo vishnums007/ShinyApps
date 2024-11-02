@@ -1,0 +1,481 @@
+"Tank.Name","Stock.number.","Date.of.Birth","Fish.name","Genotype.","Responsible","Number.of.fish","Experiment.label","Food.label","Notes"
+"E1_A1","29525","24-Sep-2024","ccdc170-T2A-NTR_P2A-mcherry L2","PCR/+","MHM/RM",40,"GENOTYPE","SD","genotype"
+"E1_A2","26520","20-Jul-2023","cnr1 CR KO F0","F0/F0","YX/MHM",39,"GENOTYPE , To screen","SD","F0 crispants"
+"E1_A3","29525","24-Sep-2024","ccdc170-T2A-NTR_P2A-mcherry L2","PCR/+","MHM/RM",20,"GENOTYPE","SD","genotype"
+"E1_A4","27218","23-Oct-2023","tert ?/?","+/+ or +/- or -/-","MAG/MHM",20,"GENOTYPE , SURGERY","SD","clutch 2, WT, need to re-genotype"
+"E1_A5","27219","23-Oct-2023","tert ?/?","+/+ or +/- or -/-","MAG/MHM",13,"GENOTYPE","SC","clutch 3, genotyping for WT and mut"
+"E1_A6","29484","18-Sep-2024","ccdc170-T2A-NTR-P2A-mcherry L1","PCR/+","MHM/RM",10,"GENOTYPE","SD","genotype"
+"E1_A7","29484","18-Sep-2024","ccdc170-T2A-NTR-P2A-mcherry L1","PCR/+","MHM/RM",10,"GENOTYPE","SD","genotype"
+"E1_A8","29484","18-Sep-2024","ccdc170-T2A-NTR-P2A-mcherry L1","PCR/+","MHM/RM",10,"GENOTYPE","SD","genotype"
+"E1_A9","29484","18-Sep-2024","ccdc170-T2A-NTR-P2A-mcherry L1","PCR/+","MHM/RM",10,"GENOTYPE","SD","genotype"
+"E1_A10","29484","18-Sep-2024","ccdc170-T2A-NTR-P2A-mcherry L1","PCR/+","MHM/RM",10,"GENOTYPE","SD","genotype"
+"E1_A11","29484","18-Sep-2024","ccdc170-T2A-NTR-P2A-mcherry L1","PCR/+","MHM/RM",10,"GENOTYPE","SD","genotype"
+"E1_A12","29484","18-Sep-2024","ccdc170-T2A-NTR-P2A-mcherry L1","PCR/+","MHM/RM",10,"GENOTYPE","SD","genotype"
+"E1_A13","29526","24-Sep-2024","ccdc170-T2A-NTR-P2A-mcherry L3","PCR/+","MHM/RM",40,"GENOTYPE","SD","genotype"
+"E1_A14","29693","01-Nov-2024","mm520 inj","+/+,+/-,-/-","Enter owner name",40,"GENOTYPE","SD","asasd"
+"E1_A15",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E1_B1",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E1_B2",NA,"","","","",NA,"","",""
+"E1_B3",NA,"","","","",NA,"","",""
+"E1_B4",NA,"","","","",NA,"","",""
+"E1_B5",NA,"","","","",NA,"","",""
+"E1_B6",NA,"","","","",NA,"","",""
+"E1_B7",NA,"","","","",NA,"","",""
+"E1_B8",NA,"","","","",NA,"","",""
+"E1_B9",NA,"","","","",NA,"","",""
+"E1_B10",NA,"","","","",NA,"","",""
+"E1_B11",NA,"","","","",NA,"","",""
+"E1_B12",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E1_B13","27003","22-Sep-2023","AB","Enter genotype","MAG/MHM",18,"BREEDING STOCK","SD","AB for outcross"
+"E1_B14","26377","7-Jul-2023","tert +/?","+/-","MAG/MHM",12,"BREEDING STOCK","SD","females, hets genotyping confirmed, tert hets for incross"
+"E1_B15","26377","7-Jul-2023","tert +/?","+/-","MAG/MHM",10,"BREEDING STOCK","SD","males, hets genotyping confirmed, tert hets for incross"
+"E1_C1","25917","3-May-2023","EKAB","wildtype","MAG/MHM",39,"Lifespan","SF","clutch 1"
+"E1_C2","25918","3-May-2023","EKAB","+/+","MAG/MHM",37,"Lifespan","SF","clutch 2-1"
+"E1_C3","26048","19-May-2023","EKAB","+/+","MAG/MHM",38,"SURGERY","SF","clutch 3, 4mo"
+"E1_C4","26048","19-May-2023","EKAB","+/+","MAG/MHM",40,"SURGERY","SF","clutch 4, 4mo"
+"E1_C5","26048","19-May-2023","EKAB","+/+","MAG/MHM",40,"SURGERY","SF","clutch 5, 8mo"
+"E1_C6","26048","19-May-2023","EKAB","+/+","MAG/MHM",36,"SURGERY","SF","clutch 6, 8mo"
+"E1_C7","26048","19-May-2023","EKAB","+/+","MAG/MHM",40,"SURGERY","SF","clutch 7, 12mo"
+"E1_C8","26048","19-May-2023","EKAB","+/+","MAG/MHM",37,"SURGERY","SF","clutch 8, 12mo"
+"E1_C9","26048","19-May-2023","EKAB","+/+","MAG/MHM",39,"SURGERY","SF","clutch 9, 16mo"
+"E1_C10","26048","19-May-2023","EKAB","+/+","MAG/MHM",40,"SURGERY","SF","clutch 10, 16mo"
+"E1_D1","25917","3-May-2023","EKAB","wildtype","MAG/MHM",36,"Lifespan","AJ","clutch 1-2, AL+AL food label"
+"E1_D2","25918","3-May-2023","EKAB","+/+","MAG/MHM",39,"Lifespan","AJ","clutch 2-2, AL+AL food label"
+"E1_D3","25994","11-May-2023","EKAB","wildtype","MAG/MHM",34,"SURGERY","AJ","clutch 3, AL+AL food label, 4mo"
+"E1_D4","26048","19-May-2023","EKAB","+/+","MAG/MHM",36,"SURGERY","AJ","clutch 4, AL+AL food label, 4mo"
+"E1_D5","26048","19-May-2023","EKAB","+/+","MAG/MHM",35,"SURGERY","SF","clutch 5, AL+AL food label, 8mo"
+"E1_D6","27218","23-Oct-2023","tert ?/?","+/+ or +/- or -/-","MAG/MHM",41,"GENOTYPE","SF","clutch 2, genotyping for WT and mut"
+"E1_D7","26048","19-May-2023","EKAB","+/+","MAG/MHM",36,"SURGERY","SF","clutch 7, AL+AL food label, 12mo"
+"E1_D8","26048","19-May-2023","EKAB","+/+","MAG/MHM",33,"SURGERY","AJ","clutch 8, AL+AL food label, 12mo"
+"E1_D9","26048","19-May-2023","EKAB","+/+","MAG/MHM",40,"SURGERY","AJ","clutch 9, AL+AL food label, 16mo"
+"E1_D10","26048","19-May-2023","EKAB","+/+","MAG/MHM",34,"SURGERY","AJ","clutch 10, AL+AL food label, 16mo"
+"E1_E1","26048","19-May-2023","EKAB","wildtype","MAG/MHM",40,"OTHERS","SF","Clutch 11"
+"E1_E2","27218","23-Oct-2023","tert ?/?","+/+ or +/- or -/-","MAG/MHM",35,"SURGERY","SF","clutch 2, mutant"
+"E1_E3","26048","19-May-2023","EKAB","wildtype","MAG/MHM",40,"GENOTYPE","SF","Clutch 12"
+"E1_D4","26048","19-May-2023","EKAB","wildtype","MAG/MHM",40,"OTHERS","SF","clutch 12, AL+AL feed label"
+"E1_E5","18000","3-May-2023","Tg(pdgfrb Gal4 UAS:RFP)","RFP+","MAG/MHM",40,"OTHERS","AJ","AL+AL food label, stock #25916"
+"E1_E6","25916","3-May-2023","Tg(pdgfrb Gal4 UAS:RFP)","RFP+","MAG/MHM",40,"OTHERS","SF",""
+"E1_E7","25916","3-May-2023","Tg(pdgfrb Gal4 UAS:RFP)","RFP+","MAG/MHM",40,"OTHERS","SF",""
+"E1_E8","25958","9-May-2023","Tg(pdgfrb Gal4 UAS:RFP)","RFP+","MAG/MHM",40,"OTHERS","AJ","AL+AL food label"
+"E1_E9","25958","9-May-2023","Tg(pdgfrb Gal4 UAS:RFP)","RFP+","MAG/MHM",40,"OTHERS","SF",""
+"E1_E10","25958","9-May-2023","Tg(pdgfrb Gal4 UAS:RFP)","RFP+","MAG/MHM",40,"OTHERS","SF",""
+"E1_F1","25916","3-May-2023","Tg(pdgfrb Gal4 UAS:RFP)","RFP+","MAG/MHM",25,"BREEDING STOCK","SF",""
+"E1_F2","26703","15-Aug-2023","TU uninjected","wildtype","MAG/MHM",32,"SURGERY","SF","TU uninjected for crlf1b crispants"
+"E1_F3","26704","15-Aug-2023","crlf1b F0 CRISPR injected","F0/F0","MAG/MHM",40,"GENOTYPE , SURGERY","SF","F0 crispants"
+"E1_F4","26704","15-Aug-2023","crlf1b F0 CRISPR injected","F0/F0","MAG/MHM",40,"GENOTYPE , SURGERY","SF","F0 crispants"
+"E1_F5","26595","8-Aug-2023","bactin:gCamp6-GFP;mitfa/+","GFP/+","MHM/RM",40,"GENOTYPE","SF","clutch 1, 2, 3; 15 in E7 (SE food label)"
+"E1_F6","26595","8-Aug-2023","huC:gcamp6;mtifa","GFP/+","MHM/RM",40,"GENOTYPE","SF","clutch 1, 2, 3; 15 in E7 (SE food label)"
+"E1_F7","26595","28-Jul-2023","crlf1a crispant F0","F0/F0","MAG/MHM",40,"GENOTYPE","SF","clutch 1, 2, 3; 15 in E7 (SE food label)"
+"E1_F8","26594","28-Jul-2023","TU uninjected control","wildtype","MAG/MHM",40,"OTHERS","SF","Clutch 1, 2, 3"
+"E1_F9","27005","22-Sep-2023","crlf1a/b crispant F0","F0/F0","MAG/MHM",24,"SURGERY","SE","crlf1a/b crispant F0"
+"E1_F10","27004","22-Sep-2023","TU","wildtype","MAG/MHM",38,"SURGERY","SF","TU uninjected controls for 27005"
+"E1_G1","26757","22-Aug-2023","EKAB","+/+","MHM/RM/MG",40,"SURGERY","SF","Clutch 1 for MIck"
+"E1_G2","26757","22-Aug-2023","EKAB","+/+","MHM/RM/MG",40,"SURGERY","SF","Clutch 1 for MIck"
+"E1_G3","27218","23-Oct-2023","tert ?/?","+/+ or +/- or -/-","MAG/MHM",41,"GENOTYPE","SF","clutch 2, genotyping for WT and mut"
+"E1_G4",NA,"","","","",NA,"","",""
+"E1_G5","26759","22-Aug-2023","EKAB","+/+","MHM/RM/MG",40,"SURGERY","SF","clutch 3 for Mick"
+"E1_G6","26759","22-Aug-2023","EKAB","+/+","MHM/RM/MG",40,"SURGERY","SF","clutch 3 for Mick"
+"E1_G7","26760","22-Aug-2023","EKAB","+/+","MHM/RM/MG",40,"GENOTYPE","SF","clutch 4 for Mick"
+"E1_G8","26760","22-Aug-2023","EKAB","+/+","MHM/RM/MG",40,"GENOTYPE","SF","clutch 4 for Mick"
+"E1_G9","26761","22-Aug-2023","EKAB","+/+","MHM/RM/MG",40,"SURGERY","SF","clutch 5 for Mick"
+"E1_G10","26761","22-Aug-2023","EKAB","+/+","MHM/RM/MG",40,"SURGERY","SF","clutch 5 for Mick"
+"E2_A1","26492","19-Jul-2023","sarm1-sau1193","+/+","MED/MHM",5,"BREEDING STOCK","SB","clutch 1"
+"E2_A2","26492","19-Jul-2023","sarm1-sau1193","+/-","MED/MHM",5,"BREEDING STOCK","SB","clutch 1"
+"E2_A3","26492","19-Jul-2023","sarm1-sau1193","-/-","MED/MHM",5,"BREEDING STOCK","SB","clutch 1"
+"E2_A4","26492","19-Jul-2023","sarm1-sau1193","+/+ or +/- or -/-","MED/MHM",4,"BREEDING STOCK","SB","clutch 2"
+"E2_A5","26492","19-Jul-2023","sarm1-sau1193","+/+ or +/- or -/-","MED/MHM",4,"BREEDING STOCK","SB","clutch 2"
+"E2_A6","26492","19-Jul-2023","sarm1-sau1193","+/+ or +/- or -/-","MED/MHM",4,"BREEDING STOCK","SB","clutch 2"
+"E2_A7",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_A8",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_A9",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_A10",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_A11",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_A12",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_A13",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_A14",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_A15",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_B1",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_B2",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_B3",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_B4",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_B5",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_B6",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_B7",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_B8",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_B9",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_B10",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_B11",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_B12",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_B13",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_B14",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_B15","25072","27-Jan-2023","cd45-mCherry injected","Enter genotype","DNK",30,"To screen","JA","Cross #1 (7/12)"
+"E2_C1",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_C2",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_C3",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_C4","27335","10-Nov-2023","slc6a11b gRNA crispant F0","F0","MHM/RM",80,"GENOTYPE","SD","F1 from PCR+ F0"
+"E2_C5",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_C6",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_C7",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_C8","27569","8-Dec-2023","TU uninjected control","+/+","MHM/RM",80,"GENOTYPE","SF","F0"
+"E2_C9",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_C10",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_D1","27348","10-Nov-2023","atp1b4 gRNA crispant F0","F0","MHM/RM",80,"GENOTYPE","SF","F0"
+"E2_D2",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_D3",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_D4","26787","29-Aug-2023","tcima-EGFP F0 #5 outx Tu","JF?","DNK/MHM",120,"Experimental","SD","For MHM/Chase"
+"E2_D5","26787","1-Sep-2023","Tg(hsp70:TCIM-2A-EGFP-L3) Tg+","GFP/+","DNK/MHM",120,"Experimental","SD","For MHM/Chase"
+"E2_D6",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_D7",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_D8",NA,"","","","",NA,"","",""
+"E2_D9",NA,"","","","",NA,"","",""
+"E2_D10",NA,"","","","",NA,"","",""
+"E2_E1","27101","4-Oct-2023","slc1a3b:myrGFP-P2A-H2A-mCherry     ","GFP/+;RFP/+","MHM/MED",40,"SURGERY","SF","For Miguel"
+"E2_E2","26492","19-Jul-2023","sarm1-sau1193","+/-","MED/MHM",13,"BREEDING STOCK","SF","hets stock"
+"E2_E3",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_E4",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_E5",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_E6",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_E7",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_E8",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_E9",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_E10",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_F1",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_F2",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_F3",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_F4",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_F5",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_F6",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_F7",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_F8",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_F9",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_F10",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E2_G1","27094","3-Oct-2023","TU uninjected","wildtype","MAG/MHM",40,"GENOTYPE , SURGERY","SF","Uninjected for crlf1a/b"
+"E2_G2","27095","3-Oct-2023","crlf1a/b crispant F0","F0/F0","MAG/MHM",40,"GENOTYPE , SURGERY","SF","F0 crispants"
+"E2_G3","27095","3-Oct-2023","crlf1a/b crispant F0","F0/F0","MAG/MHM",23,"GENOTYPE , SURGERY","SE","F0 crispants"
+"E2_G4","27218","23-Oct-2023","tert ?/?","+/+ or +/- or -/-","MAG/MHM",46,"SURGERY","SF","clutch 2, WT"
+"E2_G5","27219","23-Oct-2023","tert ?/?","+/+ or +/- or -/-","MAG/MHM",38,"SURGERY","SF","clutch 3, WT"
+"E2_G6","27219","23-Oct-2023","tert ?/?","+/+ or +/- or -/-","MAG/MHM",34,"SURGERY","SF","clutch 3, mutant"
+"E2_G7","27219","23-Oct-2023","tert ?/?","+/+ or +/- or -/-","MAG/MHM",30,"GENOTYPE","SD","clutch 3, genotyping for WT and mut"
+"E2_G8","27219","23-Oct-2023","tert ?/?","+/+ or +/- or -/-","MAG/MHM",40,"GENOTYPE","SF","clutch 3, genotyping for WT and mut"
+"E2_G9","27219","23-Oct-2023","tert ?/?","+/+ or +/- or -/-","MAG/MHM",40,"GENOTYPE","SF","clutch 3, genotyping for WT and mut"
+"E2_G10","27219","23-Oct-2023","tert ?/?","+/+ or +/- or -/-","MAG/MHM",40,"GENOTYPE","SF","clutch 3, genotyping for WT and mut"
+"E3_A1",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_A2",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_A3",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_A4",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_A5",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_A6",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_A7",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_A8",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_A9",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_A10",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_A11",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_A12",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_A13",NA,"","","","",NA,"","",""
+"E3_A14",NA,"","","","",NA,"","",""
+"E3_A15",NA,"","","","",NA,"","",""
+"E3_B1",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_B2",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_B3",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_B4",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_B5",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_B6",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_B7",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_B8",NA,"","","","",NA,"","",""
+"E3_B9","25453","14-Mar-2023","syt11b-NTR2.0-mcherry (knockin F0)","F0/F0","VMS/MHM",2,"FOUNDER","JA","F1 and f7 sequenced for knockin . F1 has snps at the mcherry"
+"E3_B10",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_B11",NA,"","","","",NA,"","",""
+"E3_B12",NA,"","","","",NA,"","",""
+"E3_B13",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_B14",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_B15",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_C1",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_C2",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_C3",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_C4",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_C5","26950","14-Sep-2023","syt11b-NTR2.0-mcherry","mcherry/+ or +/+","VMS/MHM",20,"BREEDING STOCK","AD","PCR +"
+"E3_C6","26444","12-Jul-2023","hivep3b-NTR2.0-mcherry (knockin F0)","F0/F0","VMS/MHM",29,"Screen","SF","Screen for F1 embryos"
+"E3_C7",NA,"","","","",NA,"","",""
+"E3_C8",NA,"","","","",NA,"","",""
+"E3_C9",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_C10",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_D1","26072","23-May-2023","Tg(hapln1a:GFP) +/-","+/- ; GFP+","YX/MHM",19,"OTHERS","SB",""
+"E3_D2","26295","27-Jun-2023","hapln1a +/- x hapln1b +/-","a +/-; b +/+","YX/MHM",17,"SURGERY , BREEDING STOCK","SB","backup hapln1a +/- fish.  discard after genotyping other hapln1a het/"
+"E3_D3","27114","10-Oct-2023","Tg(hapln1b:eGFP)","+/- ; GFP+","YX/MHM",40,"GENOTYPE","SF","1 of 2 tanks, SCI, time course repeat"
+"E3_D4","26294","27-Jun-2023","hapln1b +/-","+/-","YX/MHM",19,"SURGERY , BREEDING STOCK","SC","genotyped by YX, stock kept in Johnson by RM"
+"E3_D5","26295","27-Jun-2023","hapln1a +/- x hapln1b +/-","+/-; +/-","MHM/RM",40,"BREEDING STOCK","SD","Enter notes"
+"E3_D6","26296","27-Jun-2023","hapln1b +/- x hapln1a +/-","+/-; +/-","MHM/RM",14,"BREEDING STOCK","SC","Enter notes"
+"E3_D7",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_D8",NA,"","","","",NA,"","",""
+"E3_D9","26296","27-Jun-2023","hapln1b +/- x hapln1a +/-","Enter genotype","MHM/RM",26,"GENOTYPE","SD","cross from Q"
+"E3_D10",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_E1","24626","16-Nov-2022","Tg(hapln1a-mCherry-NTR) +/-","+/-; RFP+","YX/MHM",30,"BREEDING STOCK","SD","breeding stock, previously done SCI exp "
+"E3_E2",NA,"","","","",NA,"","",""
+"E3_E3","26519","20-Jul-2023","lhx4 CR KO F0","F0/F0","YX/MHM",20,"BREEDING STOCK","SD","F0 crispants"
+"E3_E4","26521","20-Jul-2023","Tu","wildtype","YX/MHM",80,"GENOTYPE","SD","uninjected control for lhx4 and cnr1 CR KO F0"
+"E3_E5",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_E6","26518","20-Jul-2023","lhx4 CR KO F0","F0/F0","YX/MHM",11,"GENOTYPE , To screen","SF","F0 crispants"
+"E3_E7","26518","20-Jul-2023","lhx4 CR KO F0","F0/F0","YX/MHM",29,"SURGERY","SD","F0 crispants"
+"E3_E8","26520","20-Jul-2023","cnr1 CR KO F0","F0/F0","YX/MHM",7,"SURGERY","SD","F0 crispants"
+"E3_E9","26400","6-Jul-2023","lhx4 CR F0","F0","YX/MHM",60,"GENOTYPE","SD","F0 crispants"
+"E3_E10","26401","6-Jul-2023","Tu","wildtype","YX/MHM",25,"GENOTYPE","SD","WT sibling for lhx4 FA"
+"E3_F1",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_F2",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_F3","27492","26-Jul-2023","Enter fish name","+/-; RFP+","YX/MHM",40,"SURGERY","SF","MTZ"
+"E3_F4","26565","26-Jul-2023","Enter fish name","Tg (-)","YX/MHM",40,"SURGERY","SF","MTZ"
+"E3_F5",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_F6",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_F7",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E3_F8",NA,"","","","",NA,"","",""
+"E3_F9",NA,"","","","",NA,"","",""
+"E3_F10",NA,"","","","",NA,"","",""
+"E3_G1",NA,"","","","",NA,"","",""
+"E3_G2",NA,"","","","",NA,"","",""
+"E3_G3",NA,"","","","",NA,"","",""
+"E3_G4",NA,"","","","",NA,"","",""
+"E3_G5",NA,"","","","",NA,"","",""
+"E3_G6",NA,"","","","",NA,"","",""
+"E3_G7",NA,"","","","",NA,"","",""
+"E3_G8",NA,"","","","",NA,"","",""
+"E3_G9",NA,"","","","",NA,"","",""
+"E3_G10",NA,"","","","",NA,"","",""
+"E4_A1","29475","18-Sep-2024","slc7a11 male 3 F1","+/+ or +/-","MHM/RM",40,"GENOTYPE","SD","Stocks"
+"E4_A2","29543","12-Sep-2024","fam96c male 1 F1","+/+ or +/-","MHM/RM",40,"GENOTYPE","SD","stocks, genotype"
+"E4_A3","29455","12-Sep-2024","slc7a11 male 1 F1","+/+ or +/-","MHM/RM",40,"GENOTYPE","SD","stocks, genotype"
+"E4_A4",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_A5",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_A6",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_A7",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_A8",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_A9",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_A10",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_A11",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_A12",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_A13",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_A14",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_A15",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_B1",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_B2",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_B3",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_B4",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_B5",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_B6",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_B7",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_B8",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_B9",NA,"","","","",NA,"","",""
+"E4_B10",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_B11","27133","23-Oct-2023","gnao1a/gnao1b crispant F0","F0","MHM/RM",1,"BREEDING STOCK","SF","Genotyped for founder screening"
+"E4_B12","27133","23-Oct-2023","gnao1a/gnao1b crispant F0","F0","MHM/RM",1,"BREEDING STOCK","SF","Genotyped for founder screening"
+"E4_B13",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_B14",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_B15","26693","14-Aug-2023","ndnf-ntr-cherry KI F0","F0","MHM/RM",80,"GENOTYPE","SD","Fo"
+"E4_C1","27605","13-Dec-2023","AB*","-/-","MHM/RM",40,"BREEDING STOCK","SD","Stocks"
+"E4_C2","27905","02-Feb-2024","AB*","+/+","MHM/RM",40,"BREEDING STOCK","SD","Stocks"
+"E4_C3","27638","14-Dec-2023","scn4ab-T2A-mcherry-P2A-Ntr-KI L2A","PCR+","MHM/RM",40,"GENOTYPE","SF","Stocks"
+"E4_C4","27638","14-Dec-2023","scn4ab-T2A-mcherry-P2A-Ntr-KI L2A","PCR -","MHM/RM",40,"Stocks","SF","Stocks"
+"E4_C5","28248","14-Mar-2024","ndnf-T2A-NTR-P2A-mcherry KI Line 1","PCR/+","MHM/RM",40,"GENOTYPE","SD","genotype"
+"E4_C6","28249","14-Mar-2024","ndnf-T2A-NTR-P2A-mcherry KI Line 2","PCR/+","MHM/RM",40,"GENOTYPE","SD","genotype"
+"E4_C7","28744","30-May-2024","gnao1a/gnao1b male 1 F1","+/-","MHM/RM",20,"GENOTYPE","SD","genotype"
+"E4_C8","28744","30-May-2024","gnao1a/gnao1b male 1 F1","+/-","MHM/RM",20,"GENOTYPE","SD","genotype"
+"E4_C9","28744","21-May-2024","gnao1a/gnao1b male 8 F1","+/-","MHM/RM",20,"GENOTYPE","SD","genotype"
+"E4_C10","28744","21-May-2024","gnao1a/gnao1b male 8 F1","+/-","MHM/RM",20,"GENOTYPE","SD","genotype"
+"E4_D1","28620","30-Apr-2024","TU","+/+","MHM/RM",40,"BREEDING STOCK","SD","Stocks"
+"E4_D2","28620","30-Apr-2024","TU","+/+","MHM/RM",40,"BREEDING STOCK","SD","Stocks"
+"E4_D3","28620","30-Apr-2024","TU","+/+","MHM/RM",40,"BREEDING STOCK","SD","Stocks"
+"E4_D4","28620","30-Apr-2024","TU","+/+","MHM/RM",40,"BREEDING STOCK","SD","Stocks"
+"E4_D5","28620","30-Apr-2024","TU","+/+","MHM/RM",40,"BREEDING STOCK","SD","Stocks"
+"E4_D6",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_D7",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_D8","28776","30-May-2024","TU","+/-","MHM/RM",10,"GENOTYPE","SD","Stocks"
+"E4_D9","28776","30-May-2024","TU","+/-","MHM/RM",10,"GENOTYPE","SD","Stocks"
+"E4_D10","28776","30-May-2024","TU","+/-","MHM/RM",20,"GENOTYPE","SD","Stocks"
+"E4_E1",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_E2","28300","19-Mar-2024","ndnf-T2A-mcherry-P2A-NTR-L2A","+/- or -/-","MHM/RM",40,"GENOTYPE","SD","genotype"
+"E4_E3","28300","19-Mar-2024","ndnf-T2A-mcherry-P2A-NTR-L2A","+/- or -/-","MHM/RM",40,"GENOTYPE","SD","genotype"
+"E4_E4","28300","19-Mar-2024","ndnf-T2A-mcherry-P2A-NTR-L2A","+/- or -/-","MHM/RM",20,"GENOTYPE","SD","genotype"
+"E4_E5","28300","19-Mar-2024","ndnf-T2A-mcherry-P2A-NTR-L2A","+/- or -/-","MHM/RM",20,"GENOTYPE","SD","genotype"
+"E4_E6","28301","19-Mar-2024","ndnf-T2A-mcherry-P2A-NTR-L2B","+/- or -/-","MHM/RM",40,"GENOTYPE","SD","genotype"
+"E4_E7","28301","19-Mar-2024","ndnf-T2A-mcherry-P2A-NTR-L2B","+/- or -/-","MHM/RM",40,"GENOTYPE","SD","genotype"
+"E4_E8","28355","26-Mar-2024","ndnf-T2A-mcherry-P2A-NTR-L2B","+/-,-/-","MHM/RM",40,"GENOTYPE","SD","genotype"
+"E4_E9","28355","26-Mar-2024","ndnf-T2A-mcherry-P2A-NTR-L2B","+/-,-/-","MHM/RM",40,"GENOTYPE","SD","genotype"
+"E4_E10",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_F1","28330","22-Mar-2024","scn4ab-T2A-Flag-CreERT2 KI F0","F0","MHM/RM",40,"GENOTYPE","SD","F0"
+"E4_F2","28330","22-Mar-2024","scn4ab-T2A-Flag-CreERT2 KI F0","F0","MHM/RM",40,"GENOTYPE","SD","F0"
+"E4_F3","28331","22-Mar-2024","ccdc170-T2A-Flag-CreERT2 KI F0","F0","MHM/RM",40,"GENOTYPE","SD","F0"
+"E4_F4","28331","22-Mar-2024","ccdc170-T2A-Flag-CreERT2 KI F0","F0","MHM/RM",40,"GENOTYPE","SD","F0"
+"E4_F5","28331","22-Mar-2024","ccdc170-T2A-Flag-CreERT2 KI F0","F0","MHM/RM",40,"GENOTYPE","SD","F0"
+"E4_F6","28331","22-Mar-2024","ccdc170-T2A-Flag-CreERT2 KI F0","F0","MHM/RM",40,"GENOTYPE","SD","F0"
+"E4_F7","28857","12-Jun-2024","ndnf-T2A-NTR-P2A-mcherry KI Line 2","PCR/+","MHM/RM",40,"GENOTYPE","SD","stocks, genotype"
+"E4_F8","28778","30-May-2024","AB","+/-","MHM",40,"GENOTYPE","SD","Stocks, From FF"
+"E4_F9","28778","12-Jun-2024","ndnf-T2A-NTR-P2A-mcherry KI Line 1","PCR/+","MHM/RM",40,"GENOTYPE","SD","Stocks, From FF"
+"E4_F10","29157","25-Jul-2024","ndnf-T2A-Flag-CreERT2 KI F0","F0/F0","MHM/RM",80,"GENOTYPE","SD","F0"
+"E4_G1",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_G2",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_G3",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_G4",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_G5",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_G6",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_G7",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_G8",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_G9",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"E4_G10",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"D3_A1",NA,"","","","",NA,"","",""
+"D3_A2",NA,"","","","",NA,"","",""
+"D3_A3",NA,"","","","",NA,"","",""
+"D3_A4",NA,"","","","",NA,"","",""
+"D3_A5",NA,"","","","",NA,"","",""
+"D3_A6",NA,"","","","",NA,"","",""
+"D3_A7",NA,"","","","",NA,"","",""
+"D3_A8",NA,"","","","",NA,"","",""
+"D3_A9",NA,"","","","",NA,"","",""
+"D3_A10",NA,"","","","",NA,"","",""
+"D3_A11",NA,"","","","",NA,"","",""
+"D3_A12",NA,"","","","",NA,"","",""
+"D3_A13",NA,"","","","",NA,"","",""
+"D3_A14",NA,"","","","",NA,"","",""
+"D3_A15",NA,"","","","",NA,"","",""
+"D3_B1",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"D3_B2",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"D3_B3",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"D3_B4",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"D3_B5",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"D3_B6",NA,"","","","",NA,"","",""
+"D3_B7",NA,"","","","",NA,"","",""
+"D3_B8",NA,"","","","",NA,"","",""
+"D3_B9",NA,"","","","",NA,"","",""
+"D3_B10",NA,"","","","",NA,"","",""
+"D3_B11",NA,"","","","",NA,"","",""
+"D3_B12",NA,"","","","",NA,"","",""
+"D3_B13",NA,"","","","",NA,"","",""
+"D3_B14",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"D3_B15",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"D3_C1","29270","24-Aug-2024","hivep3b-locus-deletion F0","F0/F0","VMS/MHM",40,"GENOTYPE","SD","Genotype for founders"
+"D3_C2","29270","24-Aug-2024","hivep3b-locus-deletion F0","F0/F0","VMS/MHM",40,"GENOTYPE","SD","Genotype for founders"
+"D3_C3","29269","08-Aug-2024","hivep3a-locus-deletion F0","Enter genotype","VMS/MHM",40,"GENOTYPE","SD","Screen for founders"
+"D3_C4","29269","08-Aug-2024","hivep3a-locus-deletion F0","Enter genotype","VMS/MHM",40,"GENOTYPE","SD","Screen for founders"
+"D3_C5","29384","29-Aug-2024","Tg(-4.3kb)syt11b:lawsonCreERT2 - exorh:eGFP","GFP+","VMS/MHM",22,"GENOTYPE","SD","Screened for GFP+ pineal gland. Outcross to identify carrying founders."
+"D3_C6",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"D3_C7","28882","13-Jun-2024","syt11a_51; syt11b_80","+/+ or +/- or -/- ; +/+ or +/- or -/-","VMS/MHM",40,"GENOTYPE","SF","Genotype for double mutants, the genotype and surgery"
+"D3_C8","28882","13-Jun-2024","syt11a_51; syt11b_80","+/+ or +/- or -/- ; +/+ or +/- or -/-","VMS/MHM",40,"GENOTYPE","SF","Genotype for double mutants, the genotype and surgery"
+"D3_C9","28882","13-Jun-2024","syt11a_51; syt11b_80","+/+ or +/- or -/- ; +/+ or +/- or -/-","VMS/MHM",40,"GENOTYPE","SF","Genotype for double mutants, the genotype and surgery"
+"D3_C10","28882","13-Jun-2024","syt11a_51; syt11b_80","+/+ or +/- or -/- ; +/+ or +/- or -/-","VMS/MHM",40,"GENOTYPE","SF","Genotype for double mutants, the genotype and surgery"
+"D3_D1","27762","8-Jan-2024","syt11b-2a-eGFP KnockinF0","F0/F0","VMS/MHM",43,"GENOTYPE","SF","Screen knockin+ fish"
+"D3_D2","27762","8-Jan-2024","syt11b-2a-eGFP KnockinF0","F0/F0","VMS/MHM",43,"GENOTYPE","SF","Screen knockin+ fish"
+"D3_D3","28939","21-Jun-2024","stl236 - plecb ; stl261 - pleca","+/+ or +/- or -/- ; +/+ or +/- or -/-","VMS/MHM",40,"GENOTYPE","SD","GENOTYPE FOR double mutants, surgery, swim assays and histology"
+"D3_D4","28939","21-Jun-2024","stl236 - plecb ; stl261 - pleca","+/+ or +/- or -/- ; +/+ or +/- or -/-","VMS/MHM",40,"GENOTYPE","SD","GENOTYPE FOR double mutants, surgery, swim assays and histology"
+"D3_D5","28939","21-Jun-2024","stl236 - plecb ; stl261 - pleca","+/+ or +/- or -/- ; +/+ or +/- or -/-","VMS/MHM",40,"GENOTYPE","SD","GENOTYPE FOR double mutants, surgery, swim assays and histology"
+"D3_D6","28939","21-Jun-2024","stl236 - plecb ; stl261 - pleca","+/+ or +/- or -/- ; +/+ or +/- or -/-","VMS/MHM",40,"GENOTYPE","SD","GENOTYPE FOR double mutants, surgery, swim assays and histology"
+"D3_D7","28978","26-Jun-2024","syt11b-NTR-mcherry_KI_F0","F0/F0","VMS/MHM",40,"GENOTYPE","SD","Screen for Knock-in positive F0s"
+"D3_D8","29162","26-Jul-2024","syt11b-NTR2.0-mcherry","RFP/+ or +/+","VMS/MHM",39,"GENOTYPE","SD","From F0 Founder 1, Genotype of F1  hets and then, incross them to obtain homozygotes"
+"D3_D9","29162","26-Jul-2024","syt11b-NTR2.0-mcherry","RFP/+ or +/+","VMS/MHM",39,"GENOTYPE","SD","From F0 Founder 1, Genotype of F1  hets and then, incross them to obtain homozygotes"
+"D3_D10","29162","26-Jul-2024","syt11b-NTR2.0-mcherry","RFP/+ or +/+","VMS/MHM",39,"GENOTYPE","SD","From F0 Founder 1, Genotype of F1  hets and then, incross them to obtain homozygotes"
+"D3_E1","29251","06-Aug-2024","TU uninjected control","wildtype","VMS/MHM",40,"GENOTYPE","SD","For hivep3a/b crispant experiment"
+"D3_E2","29251","06-Aug-2024","TU uninjected control","wildtype","VMS/MHM",40,"GENOTYPE","SD","For hivep3a/b crispant experiment"
+"D3_E3","29252","06-Aug-2024","hivep3a CRISPR F0","F0/F0","VMS/MHM",40,"GENOTYPE","SD","For hivep3a/b crispant experiment"
+"D3_E4","29252","06-Aug-2024","hivep3a CRISPR F0","F0/F0","VMS/MHM",20,"GENOTYPE","SD","For hivep3a/b crispant experiment"
+"D3_E5","29252","06-Aug-2024","hivep3a CRISPR F0","F0/F0","VMS/MHM",20,"GENOTYPE","SD","For hivep3a/b crispant experiment"
+"D3_E6","29253","06-Aug-2024","hivep3b CRISPR F0","F0/F0","VMS/MHM",40,"GENOTYPE","SD","For hivep3a/b crispant experiment"
+"D3_E7",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"D3_E8",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"D3_E9","29254","06-Aug-2024","hivep3a & hivep3b CRISPR F0","F0/F0 ; F0/F0","VMS/MHM",40,"GENOTYPE","SD","For hivep3a/b crispant experiment"
+"D3_E10",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"D3_F1",NA,"","","","",NA,"","",""
+"D3_F2",NA,"","","","",NA,"","",""
+"D3_F3",NA,"","","","",NA,"","",""
+"D3_F4",NA,"","","","",NA,"","",""
+"D3_F5","29425","05-Sep-2024","syt11b-T2A-CreERT2 KI male 1 F1","+/+ or +/-","MHM/RM",40,"GENOTYPE","SD","genotype"
+"D3_F6","29554","12-Sep-2024","fam96c male 3 F1","+/+ or +/-","MHM/RM",40,"GENOTYPE","SD","stocks, genotype"
+"D3_F7","29399","30-Aug-2024","syt11b-T2A-CreERT2 KI male 1 F1","PCR/+","MHM/RM",40,"GENOTYPE","SD","Stocks"
+"D3_F8","29357","23-Aug-2024","syt11b-T2A-CreERT2 Ki male 4 F1","PCR/+","MHM/RM",80,"GENOTYPE","SD","stocks, genotype"
+"D3_F9",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"D3_F10",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"D3_G1",NA,"","","","",NA,"","",""
+"D3_G2",NA,"","","","",NA,"","",""
+"D3_G3",NA,"","","","",NA,"","",""
+"D3_G4",NA,"","","","",NA,"","",""
+"D3_G5",NA,"","","","",NA,"","",""
+"D3_G6",NA,"","","","",NA,"","",""
+"D3_G7",NA,"","","","",NA,"","",""
+"D3_G8",NA,"","","","",NA,"","",""
+"D3_G9",NA,"","","","",NA,"","",""
+"D3_G10",NA,"","","","",NA,"","",""
+"D4_A1",NA,"","","","",NA,"","",""
+"D4_A2",NA,"","","","",NA,"","",""
+"D4_A3",NA,"","","","",NA,"","",""
+"D4_A4",NA,"","","","",NA,"","",""
+"D4_A5",NA,"","","","",NA,"","",""
+"D4_A6",NA,"","","","",NA,"","",""
+"D4_A7",NA,"","","","",NA,"","",""
+"D4_A8",NA,"","","","",NA,"","",""
+"D4_A9",NA,"","","","",NA,"","",""
+"D4_A10",NA,"","","","",NA,"","",""
+"D4_A11",NA,"","","","",NA,"","",""
+"D4_A12",NA,"","","","",NA,"","",""
+"D4_A13",NA,"","","","",NA,"","",""
+"D4_A14",NA,"","","","",NA,"","",""
+"D4_A15","27133","23-Oct-2023","gnao1a/gnao1b crispant F0","F0","MHM/RM",38,"BREEDING STOCK","SF","Genotyped for founder screening"
+"D4_B1",NA,"","","","",NA,"","",""
+"D4_B2",NA,"","","","",NA,"","",""
+"D4_B3",NA,"","","","",NA,"","",""
+"D4_B4",NA,"","","","",NA,"","",""
+"D4_B5",NA,"","","","",NA,"","",""
+"D4_B6",NA,"","","","",NA,"","",""
+"D4_B7",NA,"","","","",NA,"","",""
+"D4_B8",NA,"","","","",NA,"","",""
+"D4_B9",NA,"","","","",NA,"","",""
+"D4_B10",NA,"","","","",NA,"","",""
+"D4_B11",NA,"","","","",NA,"","",""
+"D4_B12",NA,"","","","",NA,"","",""
+"D4_B13","27350","10-Nov-2023","TU uninjected","+/+","LZ/MHM",3,"GENOTYPE","JA","F0"
+"D4_B14",NA,"","","","",NA,"","",""
+"D4_B15",NA,"","","","",NA,"","",""
+"D4_C1","28766","29-May-2024","scn4ab-T2A-mcheryy-P2A-NTR-L1","+/-,-/-","MHM/RM",40,"GENOTYPE","SD","genotype"
+"D4_C2",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"D4_C3",NA,NA,NA,NA,NA,NA,NA,NA,NA
+"D4_C4","27873","31-Jan-2024","ndnf-T2A-mcherry-P2A-NTR KI L1C","PCR/+","MHM/RM",40,"GENOTYPE","SF","genotype"
+"D4_C5","27873","31-Jan-2024","ndnf-T2A-mcherry-P2A-NTR KI L1C","PCR/+","MHM/RM",40,"GENOTYPE","SF","genotype"
+"D4_C6","28822","06-Jun-2024","scn4ab-T2A-mcherry-P2A-NTR-L1","+/+ or +/-","MHM/RM",40,"GENOTYPE","SD","genotype"
+"D4_C7","28822","06-Jun-2024","scn4ab-T2A-mcherry-P2A-NTR-L1","+/+ or +/-","MHM/RM",40,"GENOTYPE","SD","genotype"
+"D4_C8","28822","06-Jun-2024","scn4ab-T2A-mcherry-P2A-NTR_L1","+/+ or +/-","MHM/RM",40,"GENOTYPE","SD","genotype"
+"D4_C9","27134","23-Oct-2023","TU uninjected control","+/+","MHM/RM",18,"Swims","SD","For Paresh to swim"
+"D4_C10","27133","23-Oct-2023","gnao1a/gnao1b crispant F0","F0","MHM/RM",18,"Swims","SD","For Paresh to swim"
+"D4_D1","27748","9-Jan-2024","scn4ab-T2A-mcherry-P2A-NTR KI L1A","+/-,+/+","MHM/RM",40,"GENOTYPE","SF","genotype"
+"D4_D2","27748","9-Jan-2024","scn4ab-T2A-mcherry-P2A-NTR KI L1A","+/-,+/+","MHM/RM",40,"GENOTYPE","SF","genotype"
+"D4_D3","27835","24-Jan-2024","ndnf-T2A-mcherry-P2A-NTR-KI L1A","+/-,-/-","MHM/RM",40,"GENOTYPE","SF","genotype"
+"D4_D4","27836","24-Jan-2024","ndnf-T2A-mcherry-P2A-NTR KI L1B","+/-,-/-","MHM/RM",40,"GENOTYPE","SF","genotype"
+"D4_D5","27836","24-Jan-2024","ndnf-T2A-mcherry-P2A-NTR KI L1B","+/-,-/-","MHM/RM",40,"GENOTYPE","SF","genotype"
+"D4_D6",NA,"","","","",NA,"","",""
+"D4_D7","27749","9-Jan-2024","ccdc170-T2A-NTR-P2A-mcherry KI F0","F0","MHM/RM",50,"GENOTYPE","SF","F0"
+"D4_D8","27777","11-Jan-2024","ccdc170-T2A-NTR-P2A-mcherry KI F0","F0","MHM/RM",70,"GENOTYPE","SD","F0"
+"D4_D9","27777","11-Jan-2024","ccdc170-T2A-NTR-P2A-mcherry KI F0","F0","MHM/RM",70,"GENOTYPE","SD","F0"
+"D4_D10","27777","11-Jan-2024","ccdc170-T2A-NTR-P2A-mcherry KI F0","F0","MHM/RM",70,"GENOTYPE","SD","F0"
+"D4_E1","27347","10-Nov-2023","slc6a11b gRNA crispant F0","F0","MHM/RM",40,"GENOTYPE","SF","F0"
+"D4_E2",NA,"","","","",NA,"","",""
+"D4_E3",NA,"","","","",NA,"","",""
+"D4_E4",NA,"","","","",NA,"","",""
+"D4_E5","27570","6-Dec-2023","TU uninjected control","+/+","MHM/RM",40,"GENOTYPE","SF","uninjected controls"
+"D4_E6","27570","6-Dec-2023","TU uninjected control","+/+","MHM/RM",40,"GENOTYPE","SF","uninjected controls"
+"D4_E7","27569","8-Dec-2023","fam69c gRNA F0 crispant","F0","MHM/RM",40,"GENOTYPE","SF","F0"
+"D4_E8","27569","8-Dec-2023","fam69c gRNA F0 crispant","F0","MHM/RM",40,"GENOTYPE","SF","F0"
+"D4_E9","27568","8-Dec-2023","kcnj10b gRNA crispant F0","F0/F0","MHM/RM",40,"GENOTYPE","SF","F0"
+"D4_E10","27568","8-Dec-2023","kcnj10b gRNA crispant F0","F0/F0","MHM/RM",40,"GENOTYPE","SF","F0"
+"D4_F1",NA,"","","","",NA,"","",""
+"D4_F2",NA,"","","","",NA,"","",""
+"D4_F3",NA,"","","","",NA,"","",""
+"D4_F4",NA,"","","","",NA,"","",""
+"D4_F5","27348","10-Nov-2023","slc7a11 gRNA crispant F0","F0","MHM/RM",80,"GENOTYPE","SF","F0"
+"D4_F6","27350","11-Nov-2023","TU uninjected","+/+","LZ/MHM",40,"GENOTYPE","SB","F0"
+"D4_F7","27350","10-Nov-2023","TU uninjected","+/+","MHM/RM",80,"GENOTYPE","SF","uninjected controls"
+"D4_F8","27349","10-Nov-2023","slc7a11 gRNA crispant F0","F0","MHM/RM",40,"GENOTYPE","SD","F0"
+"D4_F9","27349","10-Nov-2023","slc7a11 gRNA crispant F0","F0","MHM/RM",40,"GENOTYPE","SD","F0"
+"D4_F10","27347","10-Nov-2023","slc6a11b gRNA crispant F0","F0","MHM/RM",40,"GENOTYPE","SF","F0"
+"D4_G1",NA,"","","","",NA,"","",""
+"D4_G2",NA,"","","","",NA,"","",""
+"D4_G3",NA,"","","","",NA,"","",""
+"D4_G4",NA,"","","","",NA,"","",""
+"D4_G5",NA,"","","","",NA,"","",""
+"D4_G6",NA,"","","","",NA,"","",""
+"D4_G7",NA,"","","","",NA,"","",""
+"D4_G8",NA,"","","","",NA,"","",""
+"D4_G9",NA,"","","","",NA,"","",""
+"D4_G10",NA,"","","","",NA,"","",""

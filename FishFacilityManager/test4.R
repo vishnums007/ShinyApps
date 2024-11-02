@@ -24,7 +24,7 @@ library(Cairo)
 nursery_info <- read.csv(file = "Nursery_room_info.csv", header = TRUE, fill = TRUE, encoding = "UTF-8")
 adult_info <- read.csv(file = "Adult_room_info.csv", header = TRUE, fill = TRUE, encoding = "UTF-8")
 Chien_Room<-read.csv(file = "Chien_room.csv", header = TRUE, fill = TRUE, encoding = "UTF-8")
-Johnson_Room<-read.csv(file = "Chien_room.csv", header = TRUE, fill = TRUE, encoding = "UTF-8")
+Johnson_Room<-read.csv(file = "Johnson_room.csv", header = TRUE, fill = TRUE, encoding = "UTF-8")
 Streisinger_room<-read.csv(file = "Streisinger_room.csv", header = TRUE, fill = TRUE, encoding = "UTF-8")
 Johnson_Nursery<-read.csv(file = "Johnson nursery .csv", header = TRUE, fill = TRUE, encoding = "UTF-8")
 Walker_Nursery<-read.csv(file = "Walker nursery.csv", header = TRUE, fill = TRUE, encoding = "UTF-8")
@@ -42,9 +42,6 @@ saveRDS(fishdb, "fishdatabase.rds")
 
 
 fishdb<-readRDS("fishdatabase.rds")
-rooms<-c(fishdb[["nursery_info"]][,1],fishdb[["adult_info"]][,1])
-combined_info<-rbind(fishdb[["nursery_info"]],fishdb[["adult_info"]])
-names(fishdb)
 
 
 locate_room<-function(df, roomname){
@@ -56,16 +53,6 @@ locate_room<-function(df, roomname){
 
 room_loc<-locate_room(combined_info, "Johnson Fish Room")
 zebra<-fishdb[[room_loc]]
-
-fishdb[["Archive"]]
-
-
-fishdb[["adult_info"]]$db_list_name[1]<-"Johnson_Room" 
-fishdb[["adult_info"]]$db_list_name[2]<-"Streisinger_room" 
-fishdb[["adult_info"]]$db_list_name[3]<-"Chien_Room" 
-
-fishdb[["nursery_info"]]$db_list_name[1]<-"Walker_Nursery" 
-fishdb[["nursery_info"]]$db_list_name[2]<-"Johnson_Nursery" 
 
 
 
