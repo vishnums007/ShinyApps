@@ -303,20 +303,20 @@ ui<- dashboardPage(
   #side bar 
   
   dashboardSidebar(width = 150,
-    collapsed = T,
-    div(htmlOutput("welcome"), style = "padding: 20px"),
-    sidebarMenu(id="tabs",style = "position: fixed; overflow: visible;",
-      menuItem("View Fish stocks",tabName = "view_stocks",icon = icon("search")),
-      menuItem("Add Fish Stocks",tabName = "add_stocks",icon = icon("plus-square")),
-      menuItem("Transfer Fish",tabName = "transfer_stocks", icon = icon("exchange-alt")),
-      menuItem("Edit Fish Stocks",tabName = "edit_stocks", icon = icon("pencil")),
-      menuItem("Genealogy",tabName = "familytree", icon = icon("timeline")),
-      menuItem("Print Label",tabName = "print_label", icon = icon("print")),
-      menuItem("Archive",tabName = "archive", icon = icon("box-archive")),
-      menuItem("User logs",tabName = "logbook", icon = icon("book")),
-      menuItem("About", tabName = "about", icon = icon("info-circle"))
-      
-    )
+                   collapsed = T,
+                   div(htmlOutput("welcome"), style = "padding: 20px"),
+                   sidebarMenu(id="tabs",style = "position: fixed; overflow: visible;",
+                               menuItem("View Fish stocks",tabName = "view_stocks",icon = icon("search")),
+                               menuItem("Add Fish Stocks",tabName = "add_stocks",icon = icon("plus-square")),
+                               menuItem("Transfer Fish",tabName = "transfer_stocks", icon = icon("exchange-alt")),
+                               menuItem("Edit Fish Stocks",tabName = "edit_stocks", icon = icon("pencil")),
+                               menuItem("Genealogy",tabName = "familytree", icon = icon("timeline")),
+                               menuItem("Print Label",tabName = "print_label", icon = icon("print")),
+                               menuItem("Archive",tabName = "archive", icon = icon("box-archive")),
+                               menuItem("User logs",tabName = "logbook", icon = icon("book")),
+                               menuItem("About", tabName = "about", icon = icon("info-circle"))
+                               
+                   )
   ),
   
   #main body
@@ -402,7 +402,7 @@ server <- function(input, output, session) {
               the download button.")),
       wellPanel(
         actionButton(inputId = "update_room_button", label="Update Fish Rooms"),
-
+        
         selectizeInput(inputId = "Fishroom_map_choices", label = "Select the Fish Room: ", choices= NULL ,selected=NULL, multiple = F,options = list(create=F, placeholder = "Select Fish Room")),
         
         actionButton(inputId = "fishroom_upload", label="Show Fish Stocks"),
@@ -439,7 +439,7 @@ server <- function(input, output, session) {
   })
   ###################################################################################  
   ##server side code for show fish stocks
-
+  
   fishdb<-readRDS("fishdatabase.rds")
   rooms<-c(fishdb[["nursery_info"]][,1],fishdb[["adult_info"]][,1])
   
@@ -451,12 +451,12 @@ server <- function(input, output, session) {
       shinyjs::hide("show_stats")
     }
   })
-
+  
   observeEvent(input$update_room_button,{
     updateSelectizeInput(session, inputId = "Fishroom_map_choices", choices = rooms, server = TRUE)
     
   })
- 
+  
   fishroom_choice<-eventReactive(input$fishroom_upload,{input$Fishroom_map_choices})
   room_map<-eventReactive(input$fishroom_upload,{
     fishdb<-readRDS("fishdatabase.rds")
@@ -556,10 +556,10 @@ server <- function(input, output, session) {
   })
   
   
-
+  
   
   observeEvent(input$fishroom_upload,{
-   
+    
   })
   
   ################################################################################################################
@@ -808,8 +808,8 @@ server <- function(input, output, session) {
   observeEvent(input$Add_nursery_confirm, {
     room_loc<-locate_room(fishdb[["nursery_info"]], nursery_add_choice())
     zebra1<-fishdb[[fishdb[["nursery_info"]]$db_list_name[room_loc]]]
-
-
+    
+    
     #WRITING DATA INTO THE EXCEL
     log_data<-fishdb[["Database_logs"]]
     archive<-fishdb[["Archive"]]
@@ -848,7 +848,7 @@ server <- function(input, output, session) {
                                     input$Experiment_n)
       
       
-
+      
       fishdb$Archive<-archive
       fishdb$Database_logs<-log_data
       nursery_selected<-fishdb[["nursery_info"]]$db_list_name[room_loc]
@@ -1376,20 +1376,20 @@ server <- function(input, output, session) {
     if(nursery_transfer_dest_choice()=="Streisinger Fish Room"){
       zebra_ad<- read.csv(file = "Streisinger_room.csv", header = T, fill = T,encoding="UTF-8")
       output$nursery_transfer_room_selection<- renderText({
-           "Your Fish will be transferred to the Streisinger room !!"
-        })
+        "Your Fish will be transferred to the Streisinger room !!"
+      })
     }else if (nursery_transfer_dest_choice()=="Johnson Fish Room"){
       zebra_ad<- read.csv(file = "Streisinger_room.csv", header = T, fill = T,encoding="UTF-8")
-          output$nursery_transfer_room_selection<- renderText({
-            "Your Fish will be transferred to the Streisinger room !!"
-          })
+      output$nursery_transfer_room_selection<- renderText({
+        "Your Fish will be transferred to the Streisinger room !!"
+      })
     } else if (nursery_transfer_dest_choice()=="Chien Fish Room"){
       zebra_ad<- read.csv(file = "Chien_room.csv", header = T, fill = T,encoding="UTF-8")
       output$nursery_transfer_room_selection<- renderText({
         "Your Fish will be transferred to the Chien room !!"
       })
     }
-
+    
     shinyjs::show("nursery_transfer")
     #shinyjs::show("nursery_transfer_dest")
     
@@ -1508,7 +1508,7 @@ server <- function(input, output, session) {
     log_data<-read.csv(file = "log.csv",header = T, fill = T,encoding="UTF-8")
     
     if (length(dest_loc>1)) {
-
+      
       for (i in 1:length(dest_loc)){
         
         zebra_ad[locate_tank(zebra_ad,dest_loc[i]),]<- list(
@@ -1522,12 +1522,12 @@ server <- function(input, output, session) {
                                           input$nursery_transfer_n,
                                           paste0(" TRANSFERRED STOCK FROM ", nursery_transfer_room(), " TO ",dest_loc[i],
                                                  " IN ", dest_room))
-          zebra_n[from_stock_loc,7]<- zebra_n[from_stock_loc,7]-as.numeric(input$nursery_transfer_n)
-
-
+        zebra_n[from_stock_loc,7]<- zebra_n[from_stock_loc,7]-as.numeric(input$nursery_transfer_n)
+        
+        
       }
       if(zebra_n[from_stock_loc,7]<0){
-      zebra_n<-zebra_n[-from_stock_loc,]
+        zebra_n<-zebra_n[-from_stock_loc,]
       }
       
     }else{
@@ -1560,7 +1560,7 @@ server <- function(input, output, session) {
     write.csv(zebra_n,file = filename_nurs,row.names = F)
     write.csv(log_data, file = "log.csv",row.names = F)
     write.csv(zebra_ad,file = filename_ad, row.names = F)
-
+    
     
     removeModal()
     
@@ -1665,44 +1665,44 @@ server <- function(input, output, session) {
         ""
       )
       isolate({
-      shinyjs::show("adult_transfer")
-      emptytanks_at<- find_empty_tanks(zebra_ad)
-      updateSelectizeInput(session, inputId = "adult_stock_transfer_destination_name" ,choices = emptytanks_at,server= T,selected = NULL)
-      
-      adt_location<- locate_tank(zebra_ad, input$adult_stock_transfer_source_name)
-      
-      fishn<- seq(1:zebra_ad[adt_location,7])
-      ov_geno<-orig_val(zebra_ad[adt_location,7],fishn)
-      updateSelectizeInput(session, inputId = "adult_transfer_n",choices = fishn,selected = fishn[ov_geno], server=T)
-      
-      genotype_list<- unique(zebra_ad[,5])
-      genotype_list<-append(genotype_list,"Enter genotype", after=0)
-      ov_geno<-orig_val(zebra_ad[adt_location,5],genotype_list)
-      updateSelectizeInput(session, inputId = "genotype_edit_adult_transfer",choices = genotype_list,selected = genotype_list[ov_geno], server=T)
-      
-      exp_label_std<-list("GENOTYPE","SURGERY","BREEDING STOCK","TRANSPLANT")
-      exp_label<- unique(zebra_ad[,8])
-      exp_label<-append(exp_label,exp_label_std,after = 0)
-      ov_explab<- orig_val(zebra_ad[adt_location,8],exp_label)
-      updateSelectizeInput(session, inputId = "Experiment_label_adult_transfer", selected = exp_label[ov_explab] ,choices = exp_label,server= T)
-      
-      food_label<-list("JA","JB","JC","JD","JE","JF","JG","JH","JI","JJ","SA","SB","SC","SD","SE","SF","SG","SH","SI","SJ",
-                       "AA","AB","AC","AD","AE","AF","AG","AH","AI","AJ")
-      ov_foodlab<- orig_val(zebra_ad[adt_location,9],food_label)
-      updateSelectizeInput(session, inputId = "Food_label_adult_adult_transfer", selected = food_label[ov_foodlab],choices = food_label,server= T)
-      
-      notes_list<-unique(zebra_ad[,10]) 
-      notes_list<-append(notes_list,"Enter notes", after = 0)
-      ov_notes<- orig_val_notes(zebra_ad[adt_location, 10], notes_list)
-      updateSelectizeInput(session, inputId = "Notes_adult_transfer", selected = notes_list[ov_notes], choices = notes_list, server = T)
-      
-      output$selected_rows_adult_stock_transfer_output<- renderPrint(
-        print(zebra_ad[adt_location,])
-      )
+        shinyjs::show("adult_transfer")
+        emptytanks_at<- find_empty_tanks(zebra_ad)
+        updateSelectizeInput(session, inputId = "adult_stock_transfer_destination_name" ,choices = emptytanks_at,server= T,selected = NULL)
+        
+        adt_location<- locate_tank(zebra_ad, input$adult_stock_transfer_source_name)
+        
+        fishn<- seq(1:zebra_ad[adt_location,7])
+        ov_geno<-orig_val(zebra_ad[adt_location,7],fishn)
+        updateSelectizeInput(session, inputId = "adult_transfer_n",choices = fishn,selected = fishn[ov_geno], server=T)
+        
+        genotype_list<- unique(zebra_ad[,5])
+        genotype_list<-append(genotype_list,"Enter genotype", after=0)
+        ov_geno<-orig_val(zebra_ad[adt_location,5],genotype_list)
+        updateSelectizeInput(session, inputId = "genotype_edit_adult_transfer",choices = genotype_list,selected = genotype_list[ov_geno], server=T)
+        
+        exp_label_std<-list("GENOTYPE","SURGERY","BREEDING STOCK","TRANSPLANT")
+        exp_label<- unique(zebra_ad[,8])
+        exp_label<-append(exp_label,exp_label_std,after = 0)
+        ov_explab<- orig_val(zebra_ad[adt_location,8],exp_label)
+        updateSelectizeInput(session, inputId = "Experiment_label_adult_transfer", selected = exp_label[ov_explab] ,choices = exp_label,server= T)
+        
+        food_label<-list("JA","JB","JC","JD","JE","JF","JG","JH","JI","JJ","SA","SB","SC","SD","SE","SF","SG","SH","SI","SJ",
+                         "AA","AB","AC","AD","AE","AF","AG","AH","AI","AJ")
+        ov_foodlab<- orig_val(zebra_ad[adt_location,9],food_label)
+        updateSelectizeInput(session, inputId = "Food_label_adult_adult_transfer", selected = food_label[ov_foodlab],choices = food_label,server= T)
+        
+        notes_list<-unique(zebra_ad[,10]) 
+        notes_list<-append(notes_list,"Enter notes", after = 0)
+        ov_notes<- orig_val_notes(zebra_ad[adt_location, 10], notes_list)
+        updateSelectizeInput(session, inputId = "Notes_adult_transfer", selected = notes_list[ov_notes], choices = notes_list, server = T)
+        
+        output$selected_rows_adult_stock_transfer_output<- renderPrint(
+          print(zebra_ad[adt_location,])
+        )
       })
       
-      }
-  
+    }
+    
     
     output$adult_transfer_room_selection<- renderText({
       "" 
@@ -3696,9 +3696,9 @@ server <- function(input, output, session) {
       wellPanel(
         
         selectInput("print_label_Fishroom_choices", "Select the Fish room: ", choices = list("Johnson Fish Room",
-                                                                                 "Streisinger Fish Room",
-                                                                                 "Walker Nursery",
-                                                                                 "Johnson Nursery"
+                                                                                             "Streisinger Fish Room",
+                                                                                             "Walker Nursery",
+                                                                                             "Johnson Nursery"
         )),
         
         actionButton(inputId = "print_label_fishroom_upload", label="View FishFacilty Map"),
@@ -3721,16 +3721,16 @@ server <- function(input, output, session) {
             hr(),
             fluidRow(column(width = 2,actionButton(inputId = "preview_label_button", label="Preview Label")),
                      column(width = 2,offset=1, downloadButton(outputId = "Download_label_button", label="Download Label"))
-                     ),
+            ),
             hr(),
             div(id="preview_label",
                 
                 
-                  strong(("Preview")),
-                  hr(),
-                  imageOutput("labelImage")
-  
-                )%>% shinyjs::hidden() 
+                strong(("Preview")),
+                hr(),
+                imageOutput("labelImage")
+                
+            )%>% shinyjs::hidden() 
             
             
             
@@ -3778,7 +3778,7 @@ server <- function(input, output, session) {
     shinyjs::show("print_label")
   })
   
-
+  
   
   observeEvent(input$print_label_fishroom_map_rows_selected,{
     selected_rows <- input$print_label_fishroom_map_rows_selected
@@ -3819,9 +3819,9 @@ server <- function(input, output, session) {
     shinyjs::show("preview_label")
   })
   
-
   
-
+  
+  
   
   #######################################################UI section for the About part##################################################################
   ######################################################################################################################################################
